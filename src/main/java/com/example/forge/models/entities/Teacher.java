@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Teacher extends BaseEntity {
-	
+
 	@NotNull
 	@NotBlank
 	@Column(unique = true)
@@ -56,4 +56,29 @@ public class Teacher extends BaseEntity {
 	@NotBlank
 	@Column(name = "phone_number", unique = true)
 	private String phoneNumber;
+	
+	public Teacher() {
+	}
+	
+	public Teacher (String dni, String name, String lastName, String email, String address, String qualification,
+			String phoneNumber) {
+		super();
+		this.dni = dni;
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.qualification = qualification;
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public void setTeacher(String name, String lastName, String email, String address, String qualification,
+			String phoneNumber) {
+		this.name = name;
+		this.lastName = lastName;
+		this.email = email;
+		this.address = address;
+		this.qualification = qualification;
+		this.phoneNumber = phoneNumber;
+	}
 }
