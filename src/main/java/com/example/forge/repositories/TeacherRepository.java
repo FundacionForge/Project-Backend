@@ -1,10 +1,10 @@
 package com.example.forge.repositories;
 
-import java.util.Optional;
+import org.springframework.stereotype.Component;
 
+import com.example.forge.baserepository.BaseRepository;
 import com.example.forge.models.entities.Teacher;
-import com.example.forge.repositorybase.RepositoryBase;
 
-public interface TeacherRepository extends RepositoryBase<Teacher>{
-	Optional<Teacher> findByName(String name); 
+@Component
+public interface TeacherRepository extends BaseRepository<Teacher>{
 }

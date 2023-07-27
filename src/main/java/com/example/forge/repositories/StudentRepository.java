@@ -1,8 +1,9 @@
 package com.example.forge.repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
 
+import com.example.forge.baserepository.BaseRepository;
 import com.example.forge.models.entities.Student;
 
-
-public interface StudentRepository extends CrudRepository<Student, Long> {}
+@Component
+public interface StudentRepository extends BaseRepository<Student>{}
