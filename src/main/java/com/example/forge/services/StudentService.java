@@ -10,48 +10,46 @@ import com.example.forge.repositories.StudentRepository;
 
 @Service
 public class StudentService {
-    
-    @Autowired
-    private StudentRepository repository; 
 
-    
-    public Student createStudent(Student student) {
+    @Autowired
+    private StudentRepository repository;
+
+    public Student create(Student student) {
         return repository.save(student);
     }
 
-    public List<Student> allStudents() {
+    public List<Student> getAll() {
         return (List<Student>) repository.findAll();
     }
 
-    public Optional<Student> getStudentbyid(Long id) {
+    public Optional<Student> getById(Long id) {
         return repository.findById(id);
     }
 
-    public Student updateStudent(Long id,String name,String lastName, String motherLastName,String email, String phoneNumber, String address, String string) {
-        Optional<Student> optionalStudent = repository.findById(id);
-        if (!optionalStudent.isPresent()) {
-            Student student = optionalStudent.get();
-            student.setName(name);
-            student.setLastName(lastName);
-            student.setMotherLastName(motherLastName);
-            student.setEmail(email);
-            student.setPhoneNumber(phoneNumber);
-            student.setAddress(address);
-            return repository.save(student);
-        }
-        return null;
-    }
 
-    public boolean deleteStudent(Long id) {
+    public Student updateById(Long id, Student updatedStudent) {
         Optional<Student> optionalStudent = repository.findById(id);
         if (optionalStudent.isPresent()) {
-            repository.delete(optionalStudent.get());;
+            Student student = optionalStudent.get();
+            student.setName(updatedStudent.getName());
+            student.setLastName(updatedStudent.getLastName());
+            student.setMotherLastName(updatedStudent.getMotherLastName());
+            student.setEmail(updatedStudent.getEmail());
+            student.setPhoneNumber(updatedStudent.getPhoneNumber());
+            student.setAddress(updatedStudent.getAddress());
+            return repository.save(student);
+        } 
+         return null;
+        }
+    
+
+    public boolean deleteById(Long id) {
+        Optional<Student> optionalStudent = repository.findById(id);
+        if (optionalStudent.isPresent()) {
+            repository.delete(optionalStudent.get());
+            ;
             return true;
         }
         return false;
     }
-
-    public Student create(Student student) {
-        return null;
-    } 
 }

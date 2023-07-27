@@ -22,31 +22,30 @@ import com.example.forge.services.StudentService;
 public class StudentController {
     
     @Autowired
-    private StudentService studentService;
+    private StudentService service;
 
     @GetMapping
-    public List<Student> getStudent() {
-        return studentService.allStudents();
+    public List<Student> getAllStudent() {
+        return service.getAll();
     }
 
     @PostMapping
     public Student createStudent(@RequestBody Student student) {
-        return studentService.create(student);
+        return service.create(student);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Optional<Student> getStudent(@PathVariable Long id) {
-        return studentService.getStudentbyid(id);
+        return service.getById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        return studentService.updateStudent(id, student.getDni(), student.getName(), student.getLastName(), student.getMotherLastName(),
-                student.getEmail(), student.getPhoneNumber(), student.getAddress());
+        return service.updateById(id, student);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public boolean deleteStudent(@PathVariable Long id) {
-        return studentService.deleteStudent(id);
+        return service.deleteById(id);
     }
 }
