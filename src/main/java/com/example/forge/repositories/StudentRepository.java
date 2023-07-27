@@ -6,5 +6,4 @@ import com.example.forge.baserepository.BaseRepository;
 import com.example.forge.models.entities.Student;
 
 @Component
-public interface StudentRepository extends BaseRepository<Student>{
-}
+public interface StudentRepository extends BaseRepository<Student>{}
