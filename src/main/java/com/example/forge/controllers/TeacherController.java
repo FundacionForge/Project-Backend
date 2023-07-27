@@ -22,7 +22,7 @@ public class TeacherController {
 	
 	@GetMapping
     public List<Teacher> getAllTeacher() {
-        return service.findAll();
+        return service.getAll();
     }
 	
 	@PostMapping
@@ -30,19 +30,19 @@ public class TeacherController {
 		return service.create(teacher);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("{id}")
 	public Teacher getTeacher(@PathVariable Long id) {
-		Teacher teacher = service.findById(id);
+		Teacher teacher = service.getById(id);
 		return teacher;
 	}
 	
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
     public Teacher updateTeacher(@PathVariable Long id, @RequestBody Teacher teacherData) {
     	Teacher updateTeacher = service.updateById(id, teacherData);
         return updateTeacher;
     }
     
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public void deleteTeacher(@PathVariable Long id) {
     	service.deleteById(id);
     }

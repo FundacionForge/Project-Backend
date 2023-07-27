@@ -13,7 +13,7 @@ public class TeacherService {
 	@Autowired
 	private BaseRepository<Teacher> repository;
 
-	public List<Teacher> findAll(){
+	public List<Teacher> getAll(){
 		return (List<Teacher>) repository.findAll();
 	}
 	
@@ -21,7 +21,7 @@ public class TeacherService {
 		return (Teacher) repository.save(teacher);
 	}
 	
-	public Teacher findById(Long id) {
+	public Teacher getById(Long id) {
 		Optional <Teacher> optional = repository.findById(id);
 		if(optional.isPresent()) {
 			return optional.get();
