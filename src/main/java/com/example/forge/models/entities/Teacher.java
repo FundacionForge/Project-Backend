@@ -28,12 +28,12 @@ public class Teacher extends BaseEntity {
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
+	@Size(min = 3, max = 15)
 	private String name;
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
+	@Size(min = 3, max = 15)
 	@Column(name = "last_name")
 	private String lastName;
 	
@@ -49,36 +49,11 @@ public class Teacher extends BaseEntity {
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 8)
+	@Size(min = 2)
 	private String qualification;
 	
 	@NotNull
 	@NotBlank
 	@Column(name = "phone_number", unique = true)
 	private String phoneNumber;
-	
-	public Teacher() {
-	}
-	
-	public Teacher (String dni, String name, String lastName, String email, String address, String qualification,
-			String phoneNumber) {
-		super();
-		this.dni = dni;
-		this.name = name;
-		this.lastName = lastName;
-		this.email = email;
-		this.address = address;
-		this.qualification = qualification;
-		this.phoneNumber = phoneNumber;
-	}
-	
-	public void setTeacher(String name, String lastName, String email, String address, String qualification,
-			String phoneNumber) {
-		this.name = name;
-		this.lastName = lastName;
-		this.email = email;
-		this.address = address;
-		this.qualification = qualification;
-		this.phoneNumber = phoneNumber;
-	}
 }
