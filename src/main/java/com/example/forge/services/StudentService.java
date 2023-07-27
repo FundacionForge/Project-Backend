@@ -9,31 +9,26 @@ import com.example.forge.models.entities.Student;
 import com.example.forge.repositories.StudentRepository;
 
 @Service
-public class StudentsService {
+public class StudentService {
     
     @Autowired
-    private StudentRepository studentRepository; 
+    private StudentRepository repository; 
 
     
-    // created Student
-    public Student createdStudent(String dni,String name,String lastName, String motherLastName,String email, String phoneNumber, String address) {
-        Student student = new Student(dni, name, lastName, motherLastName, email, phoneNumber, address);
-        return studentRepository.save(student);
+    public Student createStudent(Student student) {
+        return repository.save(student);
     }
 
-    // all Students
     public List<Student> allStudents() {
-        return (List<Student>) studentRepository.findAll();
+        return (List<Student>) repository.findAll();
     }
 
-    // obtain Student by id
-    public Optional<Student> getStudentid(Long id) {
-        return studentRepository.findById(id);
+    public Optional<Student> getStudentbyid(Long id) {
+        return repository.findById(id);
     }
 
-    // update Student
     public Student updateStudent(Long id,String name,String lastName, String motherLastName,String email, String phoneNumber, String address, String string) {
-        Optional<Student> optionalStudent = studentRepository.findById(id);
+        Optional<Student> optionalStudent = repository.findById(id);
         if (!optionalStudent.isPresent()) {
             Student student = optionalStudent.get();
             student.setName(name);
@@ -42,18 +37,21 @@ public class StudentsService {
             student.setEmail(email);
             student.setPhoneNumber(phoneNumber);
             student.setAddress(address);
-            return studentRepository.save(student);
+            return repository.save(student);
         }
         return null;
     }
 
-    // delete Student by id
     public boolean deleteStudent(Long id) {
-        Optional<Student> optionalStudent = studentRepository.findById(id);
+        Optional<Student> optionalStudent = repository.findById(id);
         if (optionalStudent.isPresent()) {
-            studentRepository.delete(optionalStudent.get());;
+            repository.delete(optionalStudent.get());;
             return true;
         }
         return false;
+    }
+
+    public Student create(Student student) {
+        return null;
     } 
 }

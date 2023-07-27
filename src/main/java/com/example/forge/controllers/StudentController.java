@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.forge.models.entities.Student;
-import com.example.forge.services.StudentsService;
+import com.example.forge.services.StudentService;
 
 
 @RestController
@@ -22,33 +22,31 @@ import com.example.forge.services.StudentsService;
 public class StudentController {
     
     @Autowired
-    private StudentsService studentsService;
+    private StudentService studentService;
 
     @GetMapping
     public List<Student> getStudent() {
-        return studentsService.allStudents();
+        return studentService.allStudents();
     }
 
     @PostMapping
-    public Student createdStudent(@RequestBody Student student) {
-        return studentsService.createdStudent(student.getDni(), student.getName(), student.getLastName(), student.getMotherLastName(),
-                student.getEmail(), student.getPhoneNumber(), student.getAddress());
+    public Student createStudent(@RequestBody Student student) {
+        return studentService.create(student);
     }
 
     @GetMapping("/{id}")
-    public Optional<Student> Studentbyid(@PathVariable Long id) {
-        return studentsService.getStudentid(id);
+    public Optional<Student> getStudent(@PathVariable Long id) {
+        return studentService.getStudentbyid(id);
     }
 
     @PutMapping("/{id}")
     public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        return studentsService.updateStudent(id, student.getDni(), student.getName(), student.getLastName(), student.getMotherLastName(),
+        return studentService.updateStudent(id, student.getDni(), student.getName(), student.getLastName(), student.getMotherLastName(),
                 student.getEmail(), student.getPhoneNumber(), student.getAddress());
     }
 
     @DeleteMapping("/{id}")
     public boolean deleteStudent(@PathVariable Long id) {
-        return studentsService.deleteStudent(id);
+        return studentService.deleteStudent(id);
     }
 }
-
