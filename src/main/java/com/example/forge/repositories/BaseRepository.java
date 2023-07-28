@@ -1,8 +1,7 @@
-package com.example.forge.baserepository;
+package com.example.forge.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
-public interface BaseRepository<T> extends CrudRepository<T, Long> {
-}
+public interface BaseRepository<T> extends CrudRepository<T, Long> {}

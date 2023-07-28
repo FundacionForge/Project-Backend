@@ -41,16 +41,19 @@ public class SpringSecurityConfig {
       .authorizeHttpRequests(authRules -> authRules
       .requestMatchers(HttpMethod.GET, "/api/users").permitAll()
       .requestMatchers(HttpMethod.GET, "/api/users/{id}").hasAnyRole("USER", "ADMIN")
-      .requestMatchers("/api/users/**").hasRole("ADMIN")
+
+      .requestMatchers("/api/student/**").hasRole("ADMIN")
+      // .requestMatchers("/api/users/**").hasRole("ADMIN")
+
       .requestMatchers(HttpMethod.GET, "/api/teacher/**").permitAll()
       .requestMatchers(HttpMethod.PUT, "/api/teacher/**").permitAll()
       .requestMatchers(HttpMethod.DELETE, "/api/teacher/**").permitAll()
       .requestMatchers(HttpMethod.POST, "/api/teacher/**").permitAll()
 
-      .requestMatchers(HttpMethod.GET, "/api/student/**").permitAll()
-      .requestMatchers(HttpMethod.PUT, "/api/student/**").permitAll()
-      .requestMatchers(HttpMethod.DELETE, "/api/student/**").permitAll()
-      .requestMatchers(HttpMethod.POST, "/api/student/**").permitAll()
+      // .requestMatchers(HttpMethod.GET, "/api/student/**").hasAnyRole("USER", "ADMIN")
+      // .requestMatchers(HttpMethod.PUT, "/api/student/**").permitAll()
+      // .requestMatchers(HttpMethod.DELETE, "/api/student/**").permitAll()
+      // .requestMatchers(HttpMethod.POST, "/api/student/**").permitAll()
 
       .requestMatchers(HttpMethod.GET, "/api/course/**").permitAll()
       .requestMatchers(HttpMethod.PUT, "/api/course/**").permitAll()

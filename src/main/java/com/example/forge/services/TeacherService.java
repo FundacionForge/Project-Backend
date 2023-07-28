@@ -4,23 +4,23 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.example.forge.baserepository.BaseRepository;
+
 import com.example.forge.models.entities.Teacher;
+import com.example.forge.repositories.BaseRepository;
 
 @Service
 public class TeacherService {
-	
 	@Autowired
 	private BaseRepository<Teacher> repository;
 
 	public List<Teacher> getAll(){
 		return (List<Teacher>) repository.findAll();
 	}
-	
+
 	public Teacher create(Teacher teacher) {
 		return (Teacher) repository.save(teacher);
 	}
-	
+
 	public Teacher getById(Long id) {
 		Optional <Teacher> optional = repository.findById(id);
 		if(optional.isPresent()) {
@@ -29,7 +29,7 @@ public class TeacherService {
 			return null;
 		}
 	}
-	
+
 	public Teacher updateById(Long id, Teacher teacherData) {
 		Teacher teacher = repository.findById(id).orElse(null);
 		if(teacher == null) {
@@ -44,9 +44,8 @@ public class TeacherService {
 		teacher.setPhoneNumber(teacherData.getPhoneNumber());
 		return create(teacher);
 	}
-	
+
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
-	
 }
