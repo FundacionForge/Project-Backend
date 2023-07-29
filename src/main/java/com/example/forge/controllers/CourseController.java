@@ -19,7 +19,7 @@ import com.example.forge.services.CourseService;
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {
-    
+
     @Autowired
     private CourseService service;
 
