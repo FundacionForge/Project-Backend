@@ -13,8 +13,6 @@ import com.example.forge.repositories.CourseRepository;
 
 @Service
 public class CourseService {
-
-
     @Autowired
     private CourseRepository repository;
 

@@ -1,5 +1,6 @@
 package com.example.forge.models.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import com.example.forge.models.BaseEntity;
@@ -15,7 +16,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,18 +34,15 @@ public class Student extends BaseEntity {
 
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
 	private String name;
 
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
 	@Column(name = "last_name")
 	private String lastName;
 
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
 	@Column(name = "mother_last_name")
 	private String motherLastName;
 
@@ -57,7 +54,7 @@ public class Student extends BaseEntity {
 
 	@NotNull
 	@NotBlank
-	@Column(name = "phone_number", unique = true)
+	@Column(name = "phone_number")
 	private String phoneNumber;
 
 	@NotNull
@@ -70,7 +67,7 @@ public class Student extends BaseEntity {
     joinColumns = @JoinColumn(name = "student_id"),
     inverseJoinColumns = @JoinColumn(name = "course_id")
   )
-  private Set<Course> courses;
+  private Set<Course> courses = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
@@ -78,7 +75,7 @@ public class Student extends BaseEntity {
     joinColumns = @JoinColumn(name = "student_id"),
     inverseJoinColumns = @JoinColumn(name = "degree_id")
   )
-  private Set<Degree> degrees;
+  private Set<Degree> degrees = new HashSet<>();
 
   @ManyToOne
   @JoinColumn(name = "shift_id")

@@ -12,12 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -35,18 +32,15 @@ public class Teacher extends BaseEntity {
 
 	@NotNull
 	@NotBlank
-	@Size(min = 3, max = 15)
 	private String name;
 
 	@NotNull
 	@NotBlank
-	@Size(min = 3, max = 15)
 	@Column(name = "last_name")
 	private String lastName;
 
 	@NotNull
 	@NotBlank
-	@Email
 	@Column(unique = true)
 	private String email;
 
@@ -56,12 +50,10 @@ public class Teacher extends BaseEntity {
 
 	@NotNull
 	@NotBlank
-	@Size(min = 2)
 	private String qualification;
 
 	@NotNull
 	@NotBlank
-	@Column(name = "phone_number", unique = true)
 	private String phoneNumber;
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -70,7 +62,7 @@ public class Teacher extends BaseEntity {
     joinColumns = @JoinColumn(name = "teacher_id"),
     inverseJoinColumns = @JoinColumn(name = "degree_id")
   )
-  private Set<Degree> degrees;
+  private Set<Degree> degrees = new HashSet<Degree>();
 
   @ManyToOne
   @JoinColumn(name = "shift_id")

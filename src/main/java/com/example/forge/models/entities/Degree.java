@@ -1,5 +1,6 @@
 package com.example.forge.models.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.Column;
@@ -44,17 +45,17 @@ public class Degree {
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
+      name = "degree_teacher",
+      joinColumns = @JoinColumn(name = "degree_id"),
+      inverseJoinColumns = @JoinColumn(name = "teacher_id")
+  )
+  private Set<Teacher> teachers = new HashSet<>();
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JoinTable(
     name = "student_degree",
     joinColumns = @JoinColumn(name = "degree_id"),
     inverseJoinColumns = @JoinColumn(name = "student_id")
   )
-  private Set<Student> students;
-
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(
-    name = "degree_teacher",
-    joinColumns = @JoinColumn(name = "degree_id"),
-    inverseJoinColumns = @JoinColumn(name = "teacher_id")
-  )
-  private Set<Teacher> teachers;
+  private Set<Student> students = new HashSet<>();
 }

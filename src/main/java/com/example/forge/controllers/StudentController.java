@@ -16,17 +16,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.forge.models.entities.Student;
 import com.example.forge.services.StudentService;
 
-
 @RestController
 @RequestMapping("/api/student")
 public class StudentController {
-    
     @Autowired
     private StudentService service;
 
     @GetMapping
     public List<Student> getAllStudent() {
-        return service.getAll();
+      return service.getAll();
     }
 
     @PostMapping

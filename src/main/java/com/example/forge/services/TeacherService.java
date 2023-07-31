@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.forge.models.entities.Teacher;
-import com.example.forge.repositories.BaseRepository;
+import com.example.forge.repositories.TeacherRepository;
 
 @Service
 public class TeacherService {
 	@Autowired
-	private BaseRepository<Teacher> repository;
+	private TeacherRepository repository;
 
 	public List<Teacher> getAll(){
 		return (List<Teacher>) repository.findAll();
