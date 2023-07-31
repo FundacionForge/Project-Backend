@@ -20,23 +20,24 @@ import lombok.Setter;
 public abstract class BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  protected Long id;
 
   @Column(updatable=false, name = "created_at")
   @DateTimeFormat(pattern="yyyy-MM-dd")
-  private Date createdAt;
+  protected Date createdAt;
 
   @Column(name = "updated_at")
   @DateTimeFormat(pattern="yyyy-MM-dd")
-  private Date updatedAt;
+  protected Date updatedAt;
 
   @PrePersist
   protected void onCreate(){
-	this.createdAt = new Date();
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
   }
 
   @PreUpdate
   protected void onUpdate(){
-	this.updatedAt = new Date();
+	  this.updatedAt = new Date();
   }
 }

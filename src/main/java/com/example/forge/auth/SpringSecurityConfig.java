@@ -40,7 +40,8 @@ public class SpringSecurityConfig {
     return http
       .authorizeHttpRequests(authRules -> authRules
       .requestMatchers(HttpMethod.GET, "/api/users").permitAll()
-      .requestMatchers(HttpMethod.GET, "/api/users/{id}").hasAnyRole("USER", "ADMIN")
+      .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+      // .requestMatchers(HttpMethod.GET, "/api/users/{id}").hasAnyRole("USER", "ADMIN")
 
       .requestMatchers("/api/student/**").hasRole("ADMIN")
       // .requestMatchers("/api/users/**").hasRole("ADMIN")

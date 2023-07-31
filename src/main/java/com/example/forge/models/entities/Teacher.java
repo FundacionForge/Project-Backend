@@ -1,7 +1,6 @@
 package com.example.forge.models.entities;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.example.forge.models.BaseEntity;
@@ -71,7 +70,7 @@ public class Teacher extends BaseEntity {
     joinColumns = @JoinColumn(name = "teacher_id"),
     inverseJoinColumns = @JoinColumn(name = "degree_id")
   )
-  private List<Degree> degrees;
+  private Set<Degree> degrees;
 
   @ManyToOne
   @JoinColumn(name = "shift_id")

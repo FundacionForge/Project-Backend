@@ -27,11 +27,8 @@ import lombok.Setter;
 public class User extends BaseEntity {
   @NotNull
   @NotBlank
-  @Column(unique = true)
-
-  @NotNull
-  @NotBlank
   @Size(min = 4, max = 8)
+  @Column(unique = true)
   private String username;
 
   @NotNull

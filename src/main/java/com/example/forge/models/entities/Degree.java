@@ -1,6 +1,6 @@
 package com.example.forge.models.entities;
 
-import java.util.List;
+import java.util.Set;
 
 import com.example.forge.models.BaseEntity;
 
@@ -47,7 +47,7 @@ public class Degree extends BaseEntity {
     joinColumns = @JoinColumn(name = "degree_id"),
     inverseJoinColumns = @JoinColumn(name = "student_id")
   )
-  private List<Student> students;
+  private Set<Student> students;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
@@ -55,5 +55,5 @@ public class Degree extends BaseEntity {
     joinColumns = @JoinColumn(name = "degree_id"),
     inverseJoinColumns = @JoinColumn(name = "teacher_id")
   )
-  private List<Teacher> teachers;
+  private Set<Teacher> teachers;
 }
