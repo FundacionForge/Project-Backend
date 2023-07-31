@@ -1,9 +1,10 @@
 package com.example.forge.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.forge.models.entities.Student;
 import com.example.forge.repositories.StudentRepository;
@@ -38,10 +39,10 @@ public class StudentService {
             student.setPhoneNumber(updatedStudent.getPhoneNumber());
             student.setAddress(updatedStudent.getAddress());
             return repository.save(student);
-        } 
+        }
          return null;
         }
-    
+
 
     public boolean deleteById(Long id) {
         Optional<Student> optionalStudent = repository.findById(id);

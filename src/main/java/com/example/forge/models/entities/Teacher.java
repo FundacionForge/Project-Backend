@@ -76,6 +76,7 @@ public class Teacher extends BaseEntity {
   @JoinColumn(name = "shift_id")
   private Shift shift;
 
-  @OneToMany(mappedBy = "teacher")
-  private Set<Course> courses = new HashSet<>();
+  @ManyToOne
+  @JoinColumn(name = "course_id")
+  private Course course;
 }

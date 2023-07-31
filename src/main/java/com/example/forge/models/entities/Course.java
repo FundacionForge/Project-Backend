@@ -1,15 +1,18 @@
 package com.example.forge.models.entities;
 
+import java.util.HashSet;
 import java.util.Set;
-
-import com.example.forge.models.BaseEntity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,18 +26,19 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Course extends BaseEntity {
+public class Course {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
 	private String name;
 
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 25)
 	private String description;
 
-	@Size(min = 10)
 	private String image;
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -45,7 +49,6 @@ public class Course extends BaseEntity {
   )
   private Set<Student> students;
 
-  @ManyToOne
-  @JoinColumn(name = "teacher_id")
-  private Teacher teacher;
+  @OneToMany(mappedBy = "course")
+  private Set<Teacher> teachers = new HashSet<>();
 }

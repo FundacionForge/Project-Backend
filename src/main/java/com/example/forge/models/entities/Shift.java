@@ -3,9 +3,10 @@ package com.example.forge.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.example.forge.models.BaseEntity;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -20,7 +21,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Shift extends BaseEntity {
+public class Shift {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  protected Long id;
+
 	@NotNull
 	@NotBlank
 	@Size(min = 4, max = 15)
