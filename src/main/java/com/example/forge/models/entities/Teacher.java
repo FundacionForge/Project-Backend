@@ -66,9 +66,9 @@ public class Teacher extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "shift_id")
-  private Shift shift;
+  private Shift shifts;
 
   @ManyToOne
   @JoinColumn(name = "course_id")
-  private Course course;
+  private Course courses;
 }

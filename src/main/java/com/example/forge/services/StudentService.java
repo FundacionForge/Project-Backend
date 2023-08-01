@@ -30,14 +30,14 @@ public class StudentService {
     public Student updateById(Long id, Student updatedStudent) {
       Optional<Student> optionalStudent = repository.findById(id);
       if (optionalStudent.isPresent()) {
-          Student student = optionalStudent.get();
-          student.setName(updatedStudent.getName());
-          student.setLastName(updatedStudent.getLastName());
-          student.setMotherLastName(updatedStudent.getMotherLastName());
-          student.setEmail(updatedStudent.getEmail());
-          student.setPhoneNumber(updatedStudent.getPhoneNumber());
-          student.setAddress(updatedStudent.getAddress());
-          return repository.save(student);
+        Student student = optionalStudent.get();
+        student.setName(updatedStudent.getName());
+        student.setLastName(updatedStudent.getLastName());
+        student.setMotherLastName(updatedStudent.getMotherLastName());
+        student.setEmail(updatedStudent.getEmail());
+        student.setPhoneNumber(updatedStudent.getPhoneNumber());
+        student.setAddress(updatedStudent.getAddress());
+        return repository.save(student);
       }
        return null;
     }

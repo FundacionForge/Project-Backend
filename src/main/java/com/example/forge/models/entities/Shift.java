@@ -3,6 +3,8 @@ package com.example.forge.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,9 +31,11 @@ public class Shift {
 	@NotBlank
 	private String name;
 
-  @OneToMany(mappedBy = "shift")
+  @OneToMany(mappedBy = "shifts")
+  @JsonIgnore
   private Set<Student> students = new HashSet<>();
 
-  @OneToMany(mappedBy = "shift")
+  @OneToMany(mappedBy = "shifts")
+  @JsonIgnore
   private Set<Teacher> teachers = new HashSet<>();
 }

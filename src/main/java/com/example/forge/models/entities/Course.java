@@ -3,6 +3,8 @@ package com.example.forge.models.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +42,7 @@ public class Course {
 	private String image;
 
   @ManyToMany(fetch = FetchType.LAZY)
+  @JsonIgnore
   @JoinTable(
     name = "course_student",
     joinColumns = @JoinColumn(name = "course_id"),
@@ -47,6 +50,6 @@ public class Course {
   )
   private Set<Student> students = new HashSet<>();
 
-  @OneToMany(mappedBy = "course")
+  @OneToMany(mappedBy = "courses")
   private Set<Teacher> teachers = new HashSet<>();
 }
