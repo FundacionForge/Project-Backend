@@ -1,7 +1,7 @@
 package com.example.forge.auth.filters;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.example.forge.auth.SimpleGrantedAuthorityJsonCreator;
 import com.example.forge.auth.TokenJwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -47,17 +45,9 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
             .parseClaimsJws(token)
             .getBody();
 
-          Object authoritiesClaims = claims.get("authorities");
           String username = claims.getSubject();
-          Object username2 = claims.get("username");
-          System.out.println(username);
-          System.out.println(username2);
 
-          Collection<GrantedAuthority> authorities = Arrays
-            .asList(new ObjectMapper()
-            .addMixIn(SimpleGrantedAuthority.class, SimpleGrantedAuthorityJsonCreator.class)
-            .readValue(authoritiesClaims.toString().getBytes(), SimpleGrantedAuthority[].class)
-          );
+          Collection<GrantedAuthority> authorities = new ArrayList<>();
 
           UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
           SecurityContextHolder.getContext().setAuthentication(authentication);

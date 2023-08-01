@@ -1,7 +1,6 @@
 package com.example.forge.auth.filters;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,16 +10,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.forge.auth.TokenJwtConfig;
 import com.example.forge.models.entities.User;
-import com.fasterxml.jackson.core.exc.StreamReadException;
-import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -45,16 +40,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
           user = new ObjectMapper().readValue(request.getInputStream(), User.class);
           username = user.getUsername();
           password = user.getPassword();
-
-          // logger.info("Username desde request InputStream (raw) "+username);
-          // logger.info("Password desde request InputStream (raw) "+password);
-        } catch (StreamReadException e) {
-            e.printStackTrace();
-        } catch (DatabindException e) {
-            e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+          e.printStackTrace();
         }
+
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(authToken);
   }
@@ -65,22 +54,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String username = ((org.springframework.security.core.userdetails.User) authResult.getPrincipal())
           .getUsername();
 
-        Collection<? extends GrantedAuthority> roles = authResult.getAuthorities();
-        String[] roleNames = roles.stream()
-            .map(GrantedAuthority::getAuthority)
-            .toArray(String[]::new);
-        boolean isAdmin = roles.stream().anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"));
-        Claims claims = Jwts.claims();
-        claims.put("authorities", new ObjectMapper().writeValueAsString(roles));
-        claims.put("isAdmin", isAdmin);
-        claims.put("username", username);
-
+        Date expirationDate = new Date(System.currentTimeMillis() + 30L * 24L * 60L * 60L * 1000L);
         String token = Jwts.builder()
-          .setClaims(claims)
           .setSubject(username)
-          .signWith(TokenJwtConfig.SECRET_KEY)
           .setIssuedAt(new Date())
-          .setExpiration(new Date(System.currentTimeMillis() + 86400000))
+          .setExpiration(expirationDate)
+          .signWith(TokenJwtConfig.SECRET_KEY)
           .compact();
 
         response.addHeader(TokenJwtConfig.HEADER_AUTHORIZATION, TokenJwtConfig.PREFIX_TOKEN +token);
@@ -89,8 +68,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         body.put("token", token);
         body.put("message", String.format("Hola %s, has iniciado sesion con exito", username));
         body.put("username", username);
-        // body.put("isAdmin", isAdmin);
-        body.put("role", roleNames);
         String responseBody = new ObjectMapper().writeValueAsString(body);
         response.getWriter().write(responseBody);
         response.setStatus(HttpStatus.OK.value());

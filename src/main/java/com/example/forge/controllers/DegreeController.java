@@ -13,37 +13,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.forge.models.entities.Course;
-import com.example.forge.services.CourseService;
+import com.example.forge.models.entities.Degree;
+import com.example.forge.services.DegreeService;
 
 @RestController
-@RequestMapping("/api/course")
-public class CourseController {
+@RequestMapping("/api/degree")
+public class DegreeController {
   @Autowired
-  private CourseService service;
+  private DegreeService service;
 
   @GetMapping
-  public List<Course> getAllStudent(){
-    return service.getAll();
+  public List<Degree> getAllDegree(){
+      return service.getAll();
   }
 
   @PostMapping
-  public Course createCourse(@RequestBody Course course){
-    return service.create(course);
+  public Degree createDegree(@RequestBody Degree degree){
+      return service.create(degree);
   }
 
   @GetMapping("{id}")
-  public Optional<Course> getCourse(@PathVariable Long id){
-    return service.getById(id);
+  public Optional<Degree> getDegree(@PathVariable Long id){
+      return service.getById(id);
   }
 
   @PutMapping("{id}")
-  public Course updateCourse(@PathVariable Long id, @RequestBody Course course){
-    return service.updateById(id, course);
+  public Degree updateDegree(@PathVariable Long id, @RequestBody Degree degree){
+      return service.updateById(id, degree);
   }
 
   @DeleteMapping("{id}")
-  public boolean deleteStudent(@PathVariable Long id){
-    return service.deleteById(id);
+  public boolean deleteDegree(@PathVariable Long id){
+      return service.deleteById(id);
   }
 }

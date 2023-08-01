@@ -1,4 +1,4 @@
-package com.example.forge.controllers;
+package com.example.forge.services;
 
 import java.util.List;
 import java.util.Optional;

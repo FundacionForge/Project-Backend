@@ -16,36 +16,34 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.forge.models.entities.Student;
 import com.example.forge.services.StudentService;
 
-
 @RestController
 @RequestMapping("/api/student")
 public class StudentController {
-    
-    @Autowired
-    private StudentService service;
+  @Autowired
+  private StudentService service;
 
-    @GetMapping
-    public List<Student> getAllStudent() {
-        return service.getAll();
-    }
+  @GetMapping
+  public List<Student> getAllStudent() {
+    return service.getAll();
+  }
 
-    @PostMapping
-    public Student createStudent(@RequestBody Student student) {
-        return service.create(student);
-    }
+  @PostMapping
+  public Student createStudent(@RequestBody Student student) {
+    return service.create(student);
+  }
 
-    @GetMapping("{id}")
-    public Optional<Student> getStudent(@PathVariable Long id) {
-        return service.getById(id);
-    }
+  @GetMapping("{id}")
+  public Optional<Student> getStudent(@PathVariable Long id) {
+    return service.getById(id);
+  }
 
-    @PutMapping("{id}")
-    public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        return service.updateById(id, student);
-    }
+  @PutMapping("{id}")
+  public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
+    return service.updateById(id, student);
+  }
 
-    @DeleteMapping("{id}")
-    public boolean deleteStudent(@PathVariable Long id) {
-        return service.deleteById(id);
-    }
+  @DeleteMapping("{id}")
+  public boolean deleteStudent(@PathVariable Long id) {
+    return service.deleteById(id);
+  }
 }
