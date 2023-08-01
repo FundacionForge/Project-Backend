@@ -46,7 +46,6 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
             .getBody();
 
           String username = claims.getSubject();
-          System.out.println(username);
 
           Collection<GrantedAuthority> authorities = new ArrayList<>();
 

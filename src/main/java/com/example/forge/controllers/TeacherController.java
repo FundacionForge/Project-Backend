@@ -23,9 +23,9 @@ public class TeacherController {
 	private TeacherService service;
 
 	@GetMapping
-    public List<Teacher> getAllTeacher() {
-        return service.getAll();
-    }
+  public List<Teacher> getAllTeacher() {
+    return service.getAll();
+  }
 
 	@PostMapping
 	public Teacher createTeacher(@RequestBody Teacher teacher) {
@@ -38,14 +38,14 @@ public class TeacherController {
 		return teacher;
 	}
 
-    @PutMapping("{id}")
-    public Teacher updateTeacher(@PathVariable Long id, @RequestBody Teacher teacherData) {
-    	Teacher updateTeacher = service.updateById(id, teacherData);
-        return updateTeacher;
-    }
+  @PutMapping("{id}")
+  public Teacher updateTeacher(@PathVariable Long id, @RequestBody Teacher teacherData) {
+  	Teacher updateTeacher = service.updateById(id, teacherData);
+    return updateTeacher;
+  }
 
-    @DeleteMapping("{id}")
-    public void deleteTeacher(@PathVariable Long id) {
-    	service.deleteById(id);
-    }
+  @DeleteMapping("{id}")
+  public void deleteTeacher(@PathVariable Long id) {
+  	service.deleteById(id);
+  }
 }

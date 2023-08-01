@@ -39,6 +39,11 @@ public class Teacher extends BaseEntity {
 	@Column(name = "last_name")
 	private String lastName;
 
+  @NotNull
+	@NotBlank
+	@Column(name = "mother_last_name")
+	private String motherLastName;
+
 	@NotNull
 	@NotBlank
 	@Column(unique = true)
@@ -47,10 +52,6 @@ public class Teacher extends BaseEntity {
 	@NotNull
 	@NotBlank
 	private String address;
-
-	@NotNull
-	@NotBlank
-	private String qualification;
 
 	@NotNull
 	@NotBlank
@@ -71,4 +72,8 @@ public class Teacher extends BaseEntity {
   @ManyToOne
   @JoinColumn(name = "course_id")
   private Course courses;
+
+  @ManyToOne
+  @JoinColumn(name = "qualification_id")
+  private Qualification qualification;
 }

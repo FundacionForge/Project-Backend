@@ -51,5 +51,6 @@ public class Course {
   private Set<Student> students = new HashSet<>();
 
   @OneToMany(mappedBy = "courses")
+  @JsonIgnore
   private Set<Teacher> teachers = new HashSet<>();
 }

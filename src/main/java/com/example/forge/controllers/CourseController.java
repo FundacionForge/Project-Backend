@@ -19,31 +19,31 @@ import com.example.forge.services.CourseService;
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {
-    @Autowired
-    private CourseService service;
+  @Autowired
+  private CourseService service;
 
-    @GetMapping
-    public List<Course> getAllStudent(){
-        return service.getAll();
-    }
+  @GetMapping
+  public List<Course> getAllStudent(){
+    return service.getAll();
+  }
 
-    @PostMapping
-    public Course createCourse(@RequestBody Course course){
-        return service.create(course);
-    }
+  @PostMapping
+  public Course createCourse(@RequestBody Course course){
+    return service.create(course);
+  }
 
-    @GetMapping("{id}")
-    public Optional<Course> getCourse(@PathVariable Long id){
-        return service.getById(id);
-    }
+  @GetMapping("{id}")
+  public Optional<Course> getCourse(@PathVariable Long id){
+    return service.getById(id);
+  }
 
-    @PutMapping("{id}")
-    public Course updateCourse(@PathVariable Long id, @RequestBody Course course){
-        return service.updateById(id, course);
-    }
+  @PutMapping("{id}")
+  public Course updateCourse(@PathVariable Long id, @RequestBody Course course){
+    return service.updateById(id, course);
+  }
 
-    @DeleteMapping("{id}")
-    public boolean deleteStudent(@PathVariable Long id){
-        return service.deleteById(id);
-    }
+  @DeleteMapping("{id}")
+  public boolean deleteStudent(@PathVariable Long id){
+    return service.deleteById(id);
+  }
 }

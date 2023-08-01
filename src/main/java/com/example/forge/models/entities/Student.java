@@ -20,7 +20,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Table(name="students")
 @Getter
@@ -69,13 +68,9 @@ public class Student extends BaseEntity {
   )
   private Set<Course> courses = new HashSet<>();
 
-  @ManyToMany(fetch = FetchType.LAZY)
-  @JoinTable(
-    name = "student_degree",
-    joinColumns = @JoinColumn(name = "student_id"),
-    inverseJoinColumns = @JoinColumn(name = "degree_id")
-  )
-  private Set<Degree> degrees = new HashSet<>();
+  @ManyToOne
+  @JoinColumn(name = "degree_id")
+  private Degree degrees;
 
   @ManyToOne
   @JoinColumn(name = "shift_id")

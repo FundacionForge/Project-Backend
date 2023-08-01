@@ -13,37 +13,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.forge.models.entities.Shift;
-import com.example.forge.services.ShiftService;
+import com.example.forge.models.entities.Qualification;
+import com.example.forge.services.QualificationService;
 
 @RestController
-@RequestMapping("/api/shift")
-public class ShiftController {
+@RequestMapping("/api/qualification")
+public class QualificationController {
   @Autowired
-  private ShiftService service;
+  private QualificationService service;
 
   @GetMapping
-  public List<Shift> getAllStudent(){
+  public List<Qualification> getAllQualification(){
       return service.getAll();
   }
 
   @PostMapping
-  public Shift createCourse(@RequestBody Shift shift){
-      return service.create(shift);
+  public Qualification createQualification(@RequestBody Qualification qualification){
+      return service.create(qualification);
   }
 
   @GetMapping("{id}")
-  public Optional<Shift> getCourse(@PathVariable Long id){
+  public Optional<Qualification> getQualification(@PathVariable Long id){
       return service.getById(id);
   }
 
   @PutMapping("{id}")
-  public Shift updateShift(@PathVariable Long id, @RequestBody Shift shift){
-      return service.updateById(id, shift);
+  public Qualification updateQualification(@PathVariable Long id, @RequestBody Qualification qualification){
+      return service.updateById(id, qualification);
   }
 
   @DeleteMapping("{id}")
-  public boolean deleteShift(@PathVariable Long id){
+  public boolean deleteQualification(@PathVariable Long id){
       return service.deleteById(id);
   }
 }
