@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,37 +13,37 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.forge.models.entities.Student;
-import com.example.forge.services.StudentService;
+import com.example.forge.models.entities.Shift;
+import com.example.forge.services.ShiftService;
 
 @RestController
-@RequestMapping("/api/student")
-public class StudentController {
+@RequestMapping("/api/shift")
+public class ShiftController {
   @Autowired
-  private StudentService service;
+  private ShiftService service;
 
   @GetMapping
-  public List<Student> getAllStudent() {
-    return service.getAll();
+  public List<Shift> getAllStudent(){
+      return service.getAll();
   }
 
   @PostMapping
-  public Student createStudent(@RequestBody Student student) {
-    return service.create(student);
+  public Shift createCourse(@RequestBody Shift shift){
+      return service.create(shift);
   }
 
   @GetMapping("{id}")
-  public Optional<Student> getStudent(@PathVariable Long id) {
-    return service.getById(id);
+  public Optional<Shift> getCourse(@PathVariable Long id){
+      return service.getById(id);
   }
 
   @PutMapping("{id}")
-  public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
-    return service.updateById(id, student);
+  public Shift updateShift(@PathVariable Long id, @RequestBody Shift shift){
+      return service.updateById(id, shift);
   }
 
   @DeleteMapping("{id}")
-  public boolean deleteStudent(@PathVariable Long id) {
-    return service.deleteById(id);
+  public boolean deleteShift(@PathVariable Long id){
+      return service.deleteById(id);
   }
 }

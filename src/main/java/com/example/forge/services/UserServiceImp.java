@@ -1,4 +1,4 @@
-package com.example.forge.controllers;
+package com.example.forge.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +53,7 @@ public class UserServiceImp implements UserService {
   public UserDto save(User user) {
     String passwordBCrypt =  passwordEncoder.encode(user.getPassword());
     user.setPassword(passwordBCrypt);
+
     Optional<Role> o = roleRepository.findByName("ROLE_USER");
     List<Role> roles = new ArrayList<>();
     if(o.isPresent()) {

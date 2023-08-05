@@ -39,26 +39,12 @@ public class SpringSecurityConfig {
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
       .authorizeHttpRequests(authRules -> authRules
-      .requestMatchers(HttpMethod.GET, "/api/users").permitAll()
-      .requestMatchers(HttpMethod.GET, "/api/users/{id}").hasAnyRole("USER", "ADMIN")
-      .requestMatchers("/api/users/**").hasRole("ADMIN")
-      .requestMatchers(HttpMethod.GET, "/api/teacher/**").permitAll()
-      .requestMatchers(HttpMethod.PUT, "/api/teacher/**").permitAll()
-      .requestMatchers(HttpMethod.DELETE, "/api/teacher/**").permitAll()
-      .requestMatchers(HttpMethod.POST, "/api/teacher/**").permitAll()
-
-      .requestMatchers(HttpMethod.GET, "/api/student/**").permitAll()
-      .requestMatchers(HttpMethod.PUT, "/api/student/**").permitAll()
-      .requestMatchers(HttpMethod.DELETE, "/api/student/**").permitAll()
-      .requestMatchers(HttpMethod.POST, "/api/student/**").permitAll()
-
-      .requestMatchers(HttpMethod.GET, "/api/course/**").permitAll()
-      .requestMatchers(HttpMethod.PUT, "/api/course/**").permitAll()
-      .requestMatchers(HttpMethod.DELETE, "/api/course/**").permitAll()
-      .requestMatchers(HttpMethod.POST, "/api/course/**").permitAll()
-      // .requestMatchers(HttpMethod.POST, "/api/users").hasRole("ADMIN")
-      // .requestMatchers(HttpMethod.DELETE, "api/users/{id}").hasRole("ADMIN")
-      // .requestMatchers(HttpMethod.PUT, "api/users/{id}").hasRole("ADMIN")
+      .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+      .requestMatchers(HttpMethod.GET, "/api/users").authenticated()
+      .requestMatchers(HttpMethod.GET, "/api/users/{id}").authenticated()
+      .requestMatchers("/api/teacher/**").permitAll()
+      .requestMatchers("/api/student/**").authenticated()
+      .requestMatchers("/api/course/**").authenticated()
       .anyRequest().authenticated())
       .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
       .addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
@@ -72,7 +58,6 @@ public class SpringSecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
       CorsConfiguration config = new CorsConfiguration();
       config.setAllowedOriginPatterns(Arrays.asList("*"));
-      // config.setAllowedOrigins(Arrays.asList("http://localhost:5173"));
       config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
       config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
       config.setAllowCredentials(true);

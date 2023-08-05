@@ -1,27 +1,41 @@
 package com.example.forge.models.entities;
 
-import com.example.forge.models.BaseEntity;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name="shifts")
 @Getter
 @Setter
-public class Shift extends BaseEntity {
+@NoArgsConstructor
+public class Shift {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  protected Long id;
 
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
 	private String name;
-	
+
+  @OneToMany(mappedBy = "shifts")
+  @JsonIgnore
+  private Set<Student> students = new HashSet<>();
+
+  @OneToMany(mappedBy = "shifts")
+  @JsonIgnore
+  private Set<Teacher> teachers = new HashSet<>();
 }

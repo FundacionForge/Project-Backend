@@ -1,35 +1,56 @@
 package com.example.forge.models.entities;
 
-import com.example.forge.models.BaseEntity;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name="courses")
 @Getter
 @Setter
-public class Course extends BaseEntity {
-	
+@NoArgsConstructor
+public class Course {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
+
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
 	private String name;
-	
+
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 25)
 	private String description;
-	
-	@Size(min = 10)
+
 	private String image;
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @JsonIgnore
+  @JoinTable(
+    name = "course_student",
+    joinColumns = @JoinColumn(name = "course_id"),
+    inverseJoinColumns = @JoinColumn(name = "student_id")
+  )
+  private Set<Student> students = new HashSet<>();
+
+  @OneToMany(mappedBy = "courses")
+  @JsonIgnore
+  private Set<Teacher> teachers = new HashSet<>();
 }
