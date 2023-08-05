@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Teacher extends BaseEntity {
-	
+
 	@NotNull
 	@NotBlank
 	@Column(unique = true)
@@ -28,12 +28,12 @@ public class Teacher extends BaseEntity {
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
+	@Size(min = 3, max = 15)
 	private String name;
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 4, max = 15)
+	@Size(min = 3, max = 15)
 	@Column(name = "last_name")
 	private String lastName;
 	
@@ -49,7 +49,7 @@ public class Teacher extends BaseEntity {
 	
 	@NotNull
 	@NotBlank
-	@Size(min = 8)
+	@Size(min = 2)
 	private String qualification;
 	
 	@NotNull
