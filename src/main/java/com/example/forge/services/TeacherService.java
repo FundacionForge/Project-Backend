@@ -2,10 +2,10 @@ package com.example.forge.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
 import com.example.forge.models.entities.Teacher;
 import com.example.forge.repositories.TeacherRepository;
 
@@ -19,7 +19,7 @@ public class TeacherService {
 	}
 
 	public Teacher create(Teacher teacher) {
-		return (Teacher) repository.save(teacher);
+		return repository.save(teacher);
 	}
 
 	public Teacher getById(Long id) {
@@ -50,4 +50,15 @@ public class TeacherService {
 	public void deleteById(Long id) {
 		repository.deleteById(id);
 	}
+	
+    public Page<Teacher> teacherPerPage(Integer pageNumber, Integer size) {
+    	if(pageNumber == null) {
+    		pageNumber = 0;
+    		size = ((List<Teacher>) repository.findAll()).size();
+    	} else if(size == null){
+    		size = 10;
+    	}
+    	PageRequest pageRequest = PageRequest.of(pageNumber, size);
+        return repository.findAll(pageRequest);
+    }
 }
