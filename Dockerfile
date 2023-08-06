@@ -1,5 +1,5 @@
-# Usar una imagen base con Maven y JDK 11 para construir la aplicación
-FROM maven:3.8.4-jdk-17 AS build
+# Usamos la imagen oficial de OpenJDK con Alpine
+FROM openjdk:17-jdk-alpine
 
 # Establecer un directorio de trabajo
 WORKDIR /app
