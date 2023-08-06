@@ -8,4 +8,4 @@ COPY forge-0.0.1-SNAPSHOT.war /java-app.war
 ENTRYPOINT ["java", "-jar", "/java-app.war"]
 
 # Exponer los puertos que utiliza la aplicación (por ejemplo, 8080 y 9090)
-EXPOSE 7070
+EXPOSE 9090
