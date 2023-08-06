@@ -39,12 +39,10 @@ public class SpringSecurityConfig {
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
       .authorizeHttpRequests(authRules -> authRules
-      .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
-      .requestMatchers(HttpMethod.GET, "/api/users").authenticated()
-      .requestMatchers(HttpMethod.GET, "/api/users/{id}").authenticated()
-      .requestMatchers("/api/teacher/**").permitAll()
-      .requestMatchers("/api/student/**").permitAll()
-      .requestMatchers("/api/course/**").permitAll()
+      .requestMatchers("/api/users").permitAll()
+      .requestMatchers("/api/teacher/**").authenticated()
+      .requestMatchers("/api/student/**").authenticated()
+      .requestMatchers("/api/course/**").authenticated()
       .anyRequest().authenticated())
       .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
       .addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
