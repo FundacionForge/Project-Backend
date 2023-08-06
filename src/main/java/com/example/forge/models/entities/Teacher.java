@@ -39,7 +39,7 @@ public class Teacher extends BaseEntity {
 	@Column(name = "last_name")
 	private String lastName;
 
-  @NotNull
+	@NotNull
 	@NotBlank
 	@Column(name = "mother_last_name")
 	private String motherLastName;
