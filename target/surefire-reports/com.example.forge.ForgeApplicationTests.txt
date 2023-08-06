@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.forge.ForgeApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.263 s - in com.example.forge.ForgeApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.947 s - in com.example.forge.ForgeApplicationTests
