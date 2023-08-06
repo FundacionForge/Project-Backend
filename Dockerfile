@@ -1,26 +1,8 @@
 # Usamos la imagen oficial de OpenJDK con Alpine
 FROM openjdk:17-jdk-alpine
 
-# Establecer un directorio de trabajo
-WORKDIR /app
-
-# Copiar archivos de tu proyecto al directorio de trabajo
-COPY . /app
-
-# Ejecutar Maven para construir el proyecto
-RUN mvn clean package
-
-# Crear una nueva imagen basada en OpenJDK 11 para la aplicación Spring Boot
-FROM openjdk:11-jre-slim-buster
-
-# Establecer un directorio de trabajo diferente para la imagen final
-WORKDIR /app
-
-# Copiar el archivo WAR construido desde la etapa anterior
-COPY --from=build /app/target/forge-0.0.1-SNAPSHOT.war /app/forge-0.0.1-SNAPSHOT.war
-
-# Exponer el puerto que utilizará la aplicación (si es necesario)
-EXPOSE 8080
+# Copiamos el archivo WAR generado en el directorio "target" a la imagen con el nombre "java-app.war"
+COPY target/forge-0.0.1-SNAPSHOT.war /java-app.war
 
 # Comando de entrada para ejecutar la aplicación Spring Boot desde el archivo WAR
-ENTRYPOINT ["java", "-jar", "/app/forge-0.0.1-SNAPSHOT.war"]
+ENTRYPOINT ["java", "-jar", "/java-app.war"]
