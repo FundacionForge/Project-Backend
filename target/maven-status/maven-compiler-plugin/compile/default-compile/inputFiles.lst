@@ -21,7 +21,6 @@ C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\
 C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\repositories\BaseRepository.java
 C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\repositories\RoleRepository.java
 C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\services\UserService.java
-C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\services\UserServiceImp.java
 C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\auth\SimpleGrantedAuthorityJsonCreator.java
 C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\models\entities\Course.java
 C:\Users\peru\OneDrive\Escritorio\FORGE\Backend\src\main\java\com\example\forge\models\dto\UserDto.java
