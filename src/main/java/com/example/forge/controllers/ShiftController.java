@@ -17,7 +17,7 @@ import com.example.forge.models.entities.Shift;
 import com.example.forge.services.ShiftService;
 
 @RestController
-@RequestMapping("/api/shift")
+@RequestMapping("shift")
 public class ShiftController {
   @Autowired
   private ShiftService service;

@@ -16,7 +16,7 @@ import com.example.forge.models.entities.Teacher;
 import com.example.forge.services.TeacherService;
 
 @RestController
-@RequestMapping("/api/teacher")
+@RequestMapping("teacher")
 public class TeacherController {
 
 	@Autowired

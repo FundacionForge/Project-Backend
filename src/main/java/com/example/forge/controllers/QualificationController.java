@@ -17,7 +17,7 @@ import com.example.forge.models.entities.Qualification;
 import com.example.forge.services.QualificationService;
 
 @RestController
-@RequestMapping("/api/qualification")
+@RequestMapping("qualification")
 public class QualificationController {
   @Autowired
   private QualificationService service;
