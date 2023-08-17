@@ -20,33 +20,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="user")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
 public class UserEntity extends BaseEntity {
-  @NotNull
-  @NotBlank
-  @Size(min = 4, max = 8)
-  @Column(unique = true)
-  private String username;
+	@NotNull
+	@NotBlank
+	@Size(min = 4, max = 8)
+	@Column(unique = true)
+	private String username;
 
-  @NotNull
-  @NotBlank
-  private String password;
+	@NotNull
+	@NotBlank
+	private String password;
 
-  @NotNull
-  @NotBlank
-  @Email
-  @Column(unique = true)
-  private String email;
+	@NotNull
+	@NotBlank
+	@Email
+	@Column(unique = true)
+	private String email;
 
-  @ManyToMany
-  @JoinTable(
-    name = "users_roles",
-    joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"),
-    uniqueConstraints = { @UniqueConstraint(columnNames = {"user_id", "role_id"}) }
-  )
-  private List<RoleEntity> roles;
+	@ManyToMany
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "user_id", "role_id" }) })
+	private List<RoleEntity> roles;
 }

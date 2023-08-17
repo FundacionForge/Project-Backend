@@ -10,7 +10,7 @@ import com.example.forge.app.domain.entities.UserEntity;
 public interface UserRepository extends CrudRepository<UserEntity, Long>{
   Optional<UserEntity> findByUsername(String username);
 
-  @Query("select u from User u where u.username=?1")
+  @Query("select u from UserEntity u where u.username=?1")
   Optional<UserEntity> getUserByUsername(String username);
 
   void findByEmail(String email);

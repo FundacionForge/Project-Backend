@@ -1,8 +1,11 @@
 package com.example.forge.app.infraestructure.webApi.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,31 +21,42 @@ import com.example.forge.app.domain.entities.ShiftEntity;
 @RestController
 @RequestMapping("shift")
 public class ShiftController {
-  @Autowired
-  private ShiftService shiftService;
+	@Autowired
+	private ShiftService shiftService;
 
-  @GetMapping
-  public List<ShiftEntity> getAllStudent(){
-      return shiftService.getAll();
-  }
+	@GetMapping
+	public ResponseEntity<?> getAllStudent() {
+		Map<String, Object> msg = new HashMap<>();
+		List<ShiftEntity> listShifts = shiftService.getAll();
 
-  @PostMapping
-  public ShiftEntity createCourse(@RequestBody ShiftEntity shift){
-      return shiftService.create(shift);
-  }
+		if (listShifts.isEmpty()) {
+			msg.put("success", Boolean.FALSE);
+			msg.put("msg", String.format("No existen turnos"));
+			return ResponseEntity.badRequest().body(msg);
+		}
 
-  @GetMapping("{id}")
-  public ShiftEntity getCourse(@PathVariable Long id){
-      return shiftService.getById(id);
-  }
+		msg.put("success", Boolean.TRUE);
+		msg.put("data", listShifts);
+		return ResponseEntity.ok().body(msg);
+	}
 
-  @PutMapping("{id}")
-  public ShiftEntity updateShift(@PathVariable Long id, @RequestBody ShiftEntity shift){
-      return shiftService.updateById(id, shift);
-  }
+	@PostMapping
+	public ShiftEntity createCourse(@RequestBody ShiftEntity shift) {
+		return shiftService.create(shift);
+	}
 
-  @DeleteMapping("{id}")
-  public boolean deleteShift(@PathVariable Long id){
-      return shiftService.deleteById(id);
-  }
+	@GetMapping("{id}")
+	public ShiftEntity getCourse(@PathVariable Long id) {
+		return shiftService.getById(id);
+	}
+
+	@PutMapping("{id}")
+	public ShiftEntity updateShift(@PathVariable Long id, @RequestBody ShiftEntity shift) {
+		return shiftService.updateById(id, shift);
+	}
+
+	@DeleteMapping("{id}")
+	public boolean deleteShift(@PathVariable Long id) {
+		return shiftService.deleteById(id);
+	}
 }

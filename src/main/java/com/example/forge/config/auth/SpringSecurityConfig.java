@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,51 +24,54 @@ import com.example.forge.config.auth.filters.JwtValidationFilter;
 
 @Configuration
 public class SpringSecurityConfig {
-  @Autowired
-  private AuthenticationConfiguration authenticationConfiguration;
-  @Bean
-  PasswordEncoder passwordEncoder(){
-    return new BCryptPasswordEncoder();
-  };
-  @Bean
-  AuthenticationManager authenticationManager() throws Exception {
-    return authenticationConfiguration.getAuthenticationManager();
-  }
-  @Bean
-  SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    return http
-      .authorizeHttpRequests(authRules -> authRules
-      .requestMatchers("/api/users").permitAll()
-      .requestMatchers("/api/teacher/**").authenticated()
-      .requestMatchers("/api/student/**").authenticated()
-      .requestMatchers("/api/course/**").authenticated()
-      .anyRequest().authenticated())
-      .addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
-      .addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
-      .csrf(config -> config.disable())
-      .sessionManagement(managment -> managment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-      .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-      .build();
-    }
+	@Autowired
+	private AuthenticationConfiguration authenticationConfiguration;
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-      CorsConfiguration config = new CorsConfiguration();
-      config.setAllowedOriginPatterns(Arrays.asList("*"));
-      config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-      config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
-      config.setAllowCredentials(true);
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	};
 
-      UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-      source.registerCorsConfiguration("/**", config);
-      return source;
-    }
+	@Bean
+	AuthenticationManager authenticationManager() throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
 
-    @Bean
-    FilterRegistrationBean<CorsFilter> corsFilter() {
-      FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
-        new CorsFilter(corsConfigurationSource()));
-        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        return bean;
-    }
+	@Bean
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		return http
+				.authorizeHttpRequests(authRules -> authRules
+						.requestMatchers("/api/**").permitAll()
+						.requestMatchers("/api/teacher/**").authenticated()
+						.requestMatchers("/api/student/**").authenticated()
+						.requestMatchers("/api/course/**").authenticated()
+						.anyRequest().authenticated())
+				.addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
+				.addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))
+				.csrf(config -> config.disable())
+				.sessionManagement(managment -> managment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
+				.build();
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowedOriginPatterns(Arrays.asList("*"));
+		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+		config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+		config.setAllowCredentials(true);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+		return source;
+	}
+
+	@Bean
+	FilterRegistrationBean<CorsFilter> corsFilter() {
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
+				new CorsFilter(corsConfigurationSource()));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return bean;
+	}
 }
