@@ -28,7 +28,7 @@ import com.example.forge.app.domain.response.UserResponse;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/api/users")
 public class UserController {
   @Autowired
   private UserService service;
