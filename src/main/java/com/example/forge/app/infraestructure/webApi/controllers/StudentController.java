@@ -20,30 +20,30 @@ import com.example.forge.app.domain.entities.StudentEntity;
 @RequestMapping("student")
 public class StudentController {
   @Autowired
-  private StudentService service;
+  private StudentService studentService;
 
   @GetMapping
   public List<StudentEntity> getAllStudent() {
-    return service.getAll();
+    return studentService.getAll();
   }
 
   @PostMapping
   public StudentEntity createStudent(@RequestBody StudentEntity student) {
-    return service.create(student);
+    return studentService.create(student);
   }
 
   @GetMapping("{id}")
-  public Optional<StudentEntity> getStudent(@PathVariable Long id) {
-    return service.getById(id);
+  public StudentEntity getStudent(@PathVariable Long id) {
+    return studentService.getById(id);
   }
 
   @PutMapping("{id}")
   public StudentEntity updateStudent(@PathVariable Long id, @RequestBody StudentEntity student) {
-    return service.updateById(id, student);
+    return studentService.updateById(id, student);
   }
 
   @DeleteMapping("{id}")
   public boolean deleteStudent(@PathVariable Long id) {
-    return service.deleteById(id);
+    return studentService.deleteById(id);
   }
 }

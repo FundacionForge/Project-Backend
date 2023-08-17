@@ -19,31 +19,31 @@ import com.example.forge.app.domain.entities.DegreeEntity;
 @RestController
 @RequestMapping("degree")
 public class DegreeController {
-  @Autowired
-  private DegreeService service;
+	@Autowired
+	private DegreeService degreeService;
 
-  @GetMapping
-  public List<DegreeEntity> getAllDegree(){
-      return service.getAll();
-  }
+	@GetMapping
+	public List<DegreeEntity> getAllDegree() {
+		return degreeService.getAll();
+	}
 
-  @PostMapping
-  public DegreeEntity createDegree(@RequestBody DegreeEntity degree){
-      return service.create(degree);
-  }
+	@PostMapping
+	public DegreeEntity createDegree(@RequestBody DegreeEntity degree) {
+		return degreeService.create(degree);
+	}
 
-  @GetMapping("{id}")
-  public Optional<DegreeEntity> getDegree(@PathVariable Long id){
-      return service.getById(id);
-  }
+	@GetMapping("{id}")
+	public DegreeEntity getDegree(@PathVariable Long id) {
+		return degreeService.getById(id);
+	}
 
-  @PutMapping("{id}")
-  public DegreeEntity updateDegree(@PathVariable Long id, @RequestBody DegreeEntity degree){
-      return service.updateById(id, degree);
-  }
+	@PutMapping("{id}")
+	public DegreeEntity updateDegree(@PathVariable Long id, @RequestBody DegreeEntity degree) {
+		return degreeService.updateById(id, degree);
+	}
 
-  @DeleteMapping("{id}")
-  public boolean deleteDegree(@PathVariable Long id){
-      return service.deleteById(id);
-  }
+	@DeleteMapping("{id}")
+	public boolean deleteDegree(@PathVariable Long id) {
+		return degreeService.deleteById(id);
+	}
 }

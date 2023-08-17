@@ -19,31 +19,32 @@ import com.example.forge.app.domain.entities.QualificationEntity;
 @RestController
 @RequestMapping("qualification")
 public class QualificationController {
-  @Autowired
-  private QualificationService service;
+	@Autowired
+	private QualificationService quantificationService;
 
-  @GetMapping
-  public List<QualificationEntity> getAllQualification(){
-      return service.getAll();
-  }
+	@GetMapping
+	public List<QualificationEntity> getAllQualification() {
+		return quantificationService.getAll();
+	}
 
-  @PostMapping
-  public QualificationEntity createQualification(@RequestBody QualificationEntity qualification){
-      return service.create(qualification);
-  }
+	@PostMapping
+	public QualificationEntity createQualification(@RequestBody QualificationEntity qualification) {
+		return quantificationService.create(qualification);
+	}
 
-  @GetMapping("{id}")
-  public Optional<QualificationEntity> getQualification(@PathVariable Long id){
-      return service.getById(id);
-  }
+	@GetMapping("{id}")
+	public QualificationEntity getQualification(@PathVariable Long id) {
+		return quantificationService.getById(id);
+	}
 
-  @PutMapping("{id}")
-  public QualificationEntity updateQualification(@PathVariable Long id, @RequestBody QualificationEntity qualification){
-      return service.updateById(id, qualification);
-  }
+	@PutMapping("{id}")
+	public QualificationEntity updateQualification(@PathVariable Long id,
+			@RequestBody QualificationEntity qualification) {
+		return quantificationService.updateById(id, qualification);
+	}
 
-  @DeleteMapping("{id}")
-  public boolean deleteQualification(@PathVariable Long id){
-      return service.deleteById(id);
-  }
+	@DeleteMapping("{id}")
+	public boolean deleteQualification(@PathVariable Long id) {
+		return quantificationService.deleteById(id);
+	}
 }

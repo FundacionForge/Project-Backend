@@ -18,36 +18,35 @@ import com.example.forge.app.domain.entities.TeacherEntity;
 @RestController
 @RequestMapping("teacher")
 public class TeacherController {
-
 	@Autowired
-	private TeacherService service;
+	private TeacherService teacherService;
 
 	@GetMapping
-	public Page<TeacherEntity> getAllTeacher(@RequestParam (value="page", required=false) Integer pageNumber,
-			@RequestParam (value="size", required=false) Integer size) {
-		return service.teacherPerPage(pageNumber, size);
+	public Page<TeacherEntity> getAllTeacher(@RequestParam(value = "page", required = false) Integer pageNumber,
+			@RequestParam(value = "size", required = false) Integer size) {
+		return teacherService.teacherPerPage(pageNumber, size);
 	}
 
 	@PostMapping
 	public TeacherEntity createTeacher(@RequestBody TeacherEntity teacher) {
-		return service.create(teacher);
+		return teacherService.create(teacher);
 	}
 
 	@GetMapping("{id}")
 	public TeacherEntity getTeacher(@PathVariable Long id) {
-		TeacherEntity teacher = service.getById(id);
+		TeacherEntity teacher = teacherService.getById(id);
 		return teacher;
 	}
 
-  @PutMapping("{id}")
-  public TeacherEntity updateTeacher(@PathVariable Long id, @RequestBody TeacherEntity teacherData) {
-  	TeacherEntity updateTeacher = service.updateById(id, teacherData);
-    return updateTeacher;
-  }
+	@PutMapping("{id}")
+	public TeacherEntity updateTeacher(@PathVariable Long id, @RequestBody TeacherEntity teacherData) {
+		TeacherEntity updateTeacher = teacherService.updateById(id, teacherData);
+		return updateTeacher;
+	}
 
-  @DeleteMapping("{id}")
-  public void deleteTeacher(@PathVariable Long id) {
-  	service.deleteById(id);
-  }
+	@DeleteMapping("{id}")
+	public void deleteTeacher(@PathVariable Long id) {
+		teacherService.deleteById(id);
+	}
 
 }

@@ -9,28 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.forge.app.domain.entities.TeacherEntity;
 import com.example.forge.app.domain.repositories.TeacherRepository;
+import com.example.forge.app.infraestructure.shared.BaseService;
 
 @Service
-public class TeacherService {
+public class TeacherService extends BaseService<TeacherEntity> {
 	@Autowired
 	private TeacherRepository repository;
-
-	public List<TeacherEntity> getAll(){
-		return (List<TeacherEntity>) repository.findAll();
-	}
-
-	public TeacherEntity create(TeacherEntity teacher) {
-		return repository.save(teacher);
-	}
-
-	public TeacherEntity getById(Long id) {
-		Optional <TeacherEntity> optional = repository.findById(id);
-		if(optional.isPresent()) {
-			return optional.get();
-		} else {
-			return null;
-		}
-	}
 
 	public TeacherEntity updateById(Long id, TeacherEntity updatedTeacher) {
     Optional<TeacherEntity> optionalTeacher = repository.findById(id);

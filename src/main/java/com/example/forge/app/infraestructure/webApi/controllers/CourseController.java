@@ -1,7 +1,6 @@
 package com.example.forge.app.infraestructure.webApi.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,30 +19,30 @@ import com.example.forge.app.domain.entities.CourseEntity;
 @RequestMapping("course")
 public class CourseController {
   @Autowired
-  private CourseService service;
+  private CourseService courseService;
 
   @GetMapping
   public List<CourseEntity> getAllStudent(){
-    return service.getAll();
+    return courseService.getAll();
   }
 
   @PostMapping
   public CourseEntity createCourse(@RequestBody CourseEntity course){
-    return service.create(course);
+    return courseService.create(course);
   }
 
   @GetMapping("{id}")
-  public Optional<CourseEntity> getCourse(@PathVariable Long id){
-    return service.getById(id);
+  public CourseEntity getCourse(@PathVariable Long id){
+    return courseService.getById(id);
   }
 
   @PutMapping("{id}")
   public CourseEntity updateCourse(@PathVariable Long id, @RequestBody CourseEntity course){
-    return service.updateById(id, course);
+    return courseService.updateById(id, course);
   }
 
   @DeleteMapping("{id}")
   public boolean deleteStudent(@PathVariable Long id){
-    return service.deleteById(id);
+    return courseService.deleteById(id);
   }
 }

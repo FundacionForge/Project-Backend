@@ -20,30 +20,30 @@ import com.example.forge.app.domain.entities.ShiftEntity;
 @RequestMapping("shift")
 public class ShiftController {
   @Autowired
-  private ShiftService service;
+  private ShiftService shiftService;
 
   @GetMapping
   public List<ShiftEntity> getAllStudent(){
-      return service.getAll();
+      return shiftService.getAll();
   }
 
   @PostMapping
   public ShiftEntity createCourse(@RequestBody ShiftEntity shift){
-      return service.create(shift);
+      return shiftService.create(shift);
   }
 
   @GetMapping("{id}")
-  public Optional<ShiftEntity> getCourse(@PathVariable Long id){
-      return service.getById(id);
+  public ShiftEntity getCourse(@PathVariable Long id){
+      return shiftService.getById(id);
   }
 
   @PutMapping("{id}")
   public ShiftEntity updateShift(@PathVariable Long id, @RequestBody ShiftEntity shift){
-      return service.updateById(id, shift);
+      return shiftService.updateById(id, shift);
   }
 
   @DeleteMapping("{id}")
   public boolean deleteShift(@PathVariable Long id){
-      return service.deleteById(id);
+      return shiftService.deleteById(id);
   }
 }

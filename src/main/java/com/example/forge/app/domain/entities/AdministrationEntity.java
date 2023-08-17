@@ -1,6 +1,6 @@
 package com.example.forge.app.domain.entities;
 
-import com.example.forge.models.BaseEntity;
+import com.example.forge.app.infraestructure.shared.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

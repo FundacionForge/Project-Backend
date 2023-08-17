@@ -1,6 +1,5 @@
 package com.example.forge.app.application.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,23 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.example.forge.app.domain.entities.StudentEntity;
 import com.example.forge.app.domain.repositories.StudentRepository;
+import com.example.forge.app.infraestructure.shared.BaseService;
 
 @Service
-public class StudentService {
+public class StudentService extends BaseService<StudentEntity> {
   @Autowired
   private StudentRepository repository;
-
-  public StudentEntity create(StudentEntity student) {
-    return repository.save(student);
-  }
-
-  public List<StudentEntity> getAll() {
-    return (List<StudentEntity>) repository.findAll();
-  }
-
-  public Optional<StudentEntity> getById(Long id) {
-    return repository.findById(id);
-  }
 
   public StudentEntity updateById(Long id, StudentEntity updatedStudent) {
     Optional<StudentEntity> optionalStudent = repository.findById(id);

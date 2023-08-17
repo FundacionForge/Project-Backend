@@ -1,4 +1,4 @@
-package com.example.forge.models;
+package com.example.forge.app.infraestructure.shared;
 
 import java.util.Date;
 
