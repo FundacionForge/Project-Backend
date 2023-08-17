@@ -22,7 +22,8 @@ public class TeacherController {
 	private TeacherService teacherService;
 
 	@GetMapping
-	public Page<TeacherEntity> getAllTeacher(@RequestParam(value = "page", required = false) Integer pageNumber,
+	public Page<TeacherEntity> getAllTeacher(
+			@RequestParam(value = "page", required = false) Integer pageNumber,
 			@RequestParam(value = "size", required = false) Integer size) {
 		return teacherService.teacherPerPage(pageNumber, size);
 	}
@@ -39,7 +40,8 @@ public class TeacherController {
 	}
 
 	@PutMapping("{id}")
-	public TeacherEntity updateTeacher(@PathVariable Long id, @RequestBody TeacherEntity teacherData) {
+	public TeacherEntity updateTeacher(
+			@PathVariable Long id, @RequestBody TeacherEntity teacherData) {
 		TeacherEntity updateTeacher = teacherService.updateById(id, teacherData);
 		return updateTeacher;
 	}

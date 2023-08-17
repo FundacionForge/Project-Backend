@@ -1,4 +1,4 @@
-package com.example.forge.app.infraestructure.shared;
+package com.example.forge.app.infraestructure.shared.abstractBase;
 
 import java.util.List;
 import java.util.Optional;

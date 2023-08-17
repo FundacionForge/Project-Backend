@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.forge.app.domain.entities.ShiftEntity;
 import com.example.forge.app.domain.repositories.ShiftRepository;
-import com.example.forge.app.infraestructure.shared.BaseService;
+import com.example.forge.app.infraestructure.shared.abstractBase.BaseService;
 
 @Service
 public class ShiftService extends BaseService<ShiftEntity> {

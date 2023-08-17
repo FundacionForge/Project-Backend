@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.forge.app.domain.entities.QualificationEntity;
 import com.example.forge.app.domain.repositories.QualificationRepository;
-import com.example.forge.app.infraestructure.shared.BaseService;
+import com.example.forge.app.infraestructure.shared.abstractBase.BaseService;
 
 @Service
 public class QualificationService extends BaseService<QualificationEntity> {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.forge.app.domain.entities.DegreeEntity;
 import com.example.forge.app.domain.repositories.DegreeRepository;
-import com.example.forge.app.infraestructure.shared.BaseService;
+import com.example.forge.app.infraestructure.shared.abstractBase.BaseService;
 
 @Service
 public class DegreeService extends BaseService<DegreeEntity> {

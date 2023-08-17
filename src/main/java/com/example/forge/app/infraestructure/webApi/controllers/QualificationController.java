@@ -1,7 +1,6 @@
 package com.example.forge.app.infraestructure.webApi.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;

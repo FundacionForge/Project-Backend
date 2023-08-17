@@ -1,4 +1,4 @@
-package com.example.forge.app.infraestructure.shared;
+package com.example.forge.app.infraestructure.shared.abstractBase;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;

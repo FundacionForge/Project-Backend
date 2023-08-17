@@ -2,7 +2,7 @@ package com.example.forge.app.domain.entities;
 
 import java.util.List;
 
-import com.example.forge.app.infraestructure.shared.BaseEntity;
+import com.example.forge.app.infraestructure.shared.abstractBase.BaseEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
