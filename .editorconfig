@@ -1,0 +1,34 @@
+# Archivo EditorConfig superior
+root = true
+
+# Todos los archivos
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Archivos fuente de Java
+[*.java]
+indent_style = tab
+indent_size = 2
+max_line_length = 100
+
+# Archivos XML (archivos de configuración de Spring)
+[*.xml]
+indent_style = tab
+indent_size = 2
+
+# Archivos YAML (application.yaml, etc.)
+[*.yaml, *.yml]
+indent_style = space
+indent_size = 2
+
+# Archivos de propiedades
+[*.properties]
+indent_style = space
+indent_size = 2
+
+# Archivos de descuento
+[*.md]
+trim_trailing_whitespace = false

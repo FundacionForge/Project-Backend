@@ -1,0 +1,6 @@
+package com.example.forge.app.domain.repositories;
+
+import com.example.forge.app.domain.entities.StudentEntity;
+import com.example.forge.app.infraestructure.shared.BaseRepository;
+
+public interface StudentRepository extends BaseRepository<StudentEntity> {}
