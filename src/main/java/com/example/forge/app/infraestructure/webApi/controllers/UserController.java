@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/api/users")
 public class UserController {
   @Autowired
-  private UserService service;
+  private UserService userService;
 
   public class CustomErrorResponse {
     private String message;
@@ -60,12 +60,12 @@ public class UserController {
 
   @GetMapping
   public List<UserDto> list() {
-    return service.findAll();
+    return userService.findAll();
   }
 
   @GetMapping("{id}")
   public ResponseEntity<?> show(@PathVariable Long id) {
-    Optional<UserDto> userOptional = service.findById(id);
+    Optional<UserDto> userOptional = userService.findById(id);
     if(userOptional.isPresent()) {
       return ResponseEntity.ok(userOptional.orElseThrow());
     }
@@ -81,7 +81,7 @@ public class UserController {
     }
 
     try {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(user));
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     } catch (DataIntegrityViolationException e) {
       String errorMessage = "El email o el username ya están en uso.";
       Map<String, String> errorResponse = new HashMap<>();
@@ -92,7 +92,7 @@ public class UserController {
 
   @PutMapping("{id}")
   public ResponseEntity<?> update(@Valid @RequestBody UserResponse user, Long id, BindingResult result) {
-    Optional<UserDto> o = service.update(user, id);
+    Optional<UserDto> o = userService.update(user, id);
     if(o.isPresent()){
       return ResponseEntity.status(HttpStatus.CREATED).body(o.orElseThrow());
     }
@@ -101,9 +101,9 @@ public class UserController {
 
   @DeleteMapping("{id}")
   public ResponseEntity<?> remove(@PathVariable() Long id) {
-    Optional<UserDto> o = service.findById(id);
+    Optional<UserDto> o = userService.findById(id);
     if(o.isPresent()) {
-      service.remove(id);
+      userService.remove(id);
       return ResponseEntity.noContent().build();
     }
     return ResponseEntity.notFound().build();

@@ -18,11 +18,7 @@ public abstract class BaseService<T> {
 
 	public T getById(Long id) {
 		Optional<T> optional = repositoryBase.findById(id);
-		if (optional.isPresent()) {
-			return optional.get();
-		} else {
-			return null;
-		}
+		return optional.orElse(null);
 	}
 
 	public T create(T Object) {

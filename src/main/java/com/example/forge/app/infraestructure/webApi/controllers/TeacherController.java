@@ -16,7 +16,7 @@ import com.example.forge.app.application.services.TeacherService;
 import com.example.forge.app.domain.entities.TeacherEntity;
 
 @RestController
-@RequestMapping("teacher")
+@RequestMapping("/api/teacher")
 public class TeacherController {
 	@Autowired
 	private TeacherService teacherService;
@@ -50,5 +50,4 @@ public class TeacherController {
 	public void deleteTeacher(@PathVariable Long id) {
 		teacherService.deleteById(id);
 	}
-
 }

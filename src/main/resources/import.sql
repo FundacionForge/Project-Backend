@@ -1,6 +1,3 @@
-/* Entity Role */
-insert into role(name) values ('ROLE_USER'), ('ROLE_ADMIN');
-
 /* Entity Turnos */
 insert into shifts(name) values ('Temprano'), ('Tarde');
 
