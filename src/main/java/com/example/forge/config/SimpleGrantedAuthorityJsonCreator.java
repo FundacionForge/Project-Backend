@@ -1,4 +1,4 @@
-package com.example.forge.auth;
+package com.example.forge.config;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

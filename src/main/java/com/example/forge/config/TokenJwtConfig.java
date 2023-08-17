@@ -1,4 +1,4 @@
-package com.example.forge.auth;
+package com.example.forge.config;
 
 import java.security.Key;
 

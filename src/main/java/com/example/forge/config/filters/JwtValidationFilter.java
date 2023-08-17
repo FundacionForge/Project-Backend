@@ -1,4 +1,4 @@
-package com.example.forge.auth.filters;
+package com.example.forge.config.filters;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -14,8 +14,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.example.forge.auth.SimpleGrantedAuthorityJsonCreator;
-import com.example.forge.auth.TokenJwtConfig;
+import com.example.forge.config.SimpleGrantedAuthorityJsonCreator;
+import com.example.forge.config.TokenJwtConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Claims;

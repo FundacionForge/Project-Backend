@@ -1,4 +1,4 @@
-package com.example.forge.auth.filters;
+package com.example.forge.config.filters;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -14,7 +14,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.example.forge.auth.TokenJwtConfig;
+import com.example.forge.config.TokenJwtConfig;
 import com.example.forge.models.entities.User;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
