@@ -29,7 +29,7 @@ public class StudentController {
 	private StudentService studentService;
 
 	@GetMapping
-	public ResponseEntity<List<StudentEntity>> getAllStudent() {
+	public ResponseEntity<Map<String, Object>> getAllStudents() {
 		List<StudentEntity> students = studentService.getAll();
 		HttpStatus responseStatus = students.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 		String responseMessage = students.isEmpty() ? "No existen estudiantes" : "Estudiantes encontrados";
@@ -39,7 +39,7 @@ public class StudentController {
 		response.put("msg", responseMessage);
 		response.put("data", students);
 
-		return ResponseEntity.status(responseStatus).body(students);
+		return ResponseEntity.status(responseStatus).body(response);
 	}
 
 	@PostMapping
@@ -65,9 +65,6 @@ public class StudentController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-
-
-		// Si no hay errores de validación, crear el estudiante
 		StudentEntity createdStudent = studentService.create(student);
 		if (createdStudent != null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
