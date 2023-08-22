@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.example.forge.app.infraestructure.shared.objectBase.BasePeron;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -23,6 +24,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class StudentEntity extends BasePeron {
 	@ManyToMany(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private Set<CourseEntity> courses = new HashSet<>();
 

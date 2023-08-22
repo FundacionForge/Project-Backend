@@ -41,6 +41,16 @@ public class StudentService extends BaseService<StudentEntity> {
 		return false;
 	}
 
+	public boolean isEmailDuplicated(String email) {
+		long count = repository.countByEmail(email);
+		return count > 0;
+	}
+
+	public boolean isDniDuplicated(String dni) {
+		long count = repository.countByDni(dni);
+		return count > 0;
+	}
+
 	private static final int PAGE_SIZE = 10;
 	public Page<StudentEntity> studentPage(int pageNumber) {
 		PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);

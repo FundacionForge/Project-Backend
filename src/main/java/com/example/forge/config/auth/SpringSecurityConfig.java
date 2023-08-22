@@ -42,9 +42,11 @@ public class SpringSecurityConfig {
 		return http
 				.authorizeHttpRequests(authRules -> authRules
 						.requestMatchers("/api/**").permitAll()
-						// .requestMatchers("/api/teacher/**").authenticated()
-						// .requestMatchers("/api/student/**").authenticated()
-						// .requestMatchers("/api/course/**").authenticated()
+						.requestMatchers("/api/teacher/**").authenticated()
+						.requestMatchers("/api/student/**").authenticated()
+						.requestMatchers("/api/course/**").authenticated()
+						.requestMatchers("/api/degree/**").authenticated()
+						.requestMatchers("/api/shift/**").authenticated()
 						.anyRequest().authenticated())
 				.addFilter(new JwtAuthenticationFilter(authenticationConfiguration.getAuthenticationManager()))
 				.addFilter(new JwtValidationFilter(authenticationConfiguration.getAuthenticationManager()))

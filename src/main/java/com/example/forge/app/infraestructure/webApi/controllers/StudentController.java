@@ -3,10 +3,13 @@ package com.example.forge.app.infraestructure.webApi.controllers;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,12 +43,37 @@ public class StudentController {
 	}
 
 	@PostMapping
-	public ResponseEntity<StudentEntity> createStudent(@RequestBody StudentEntity student) {
-		StudentEntity createdStudent = studentService.create(student);
-		HttpStatus responseStatus = createdStudent != null ? HttpStatus.CREATED : HttpStatus.INTERNAL_SERVER_ERROR;
+	public ResponseEntity<Object> createStudent(@Valid @RequestBody StudentEntity student, BindingResult bindingResult) {
+		if (studentService.isEmailDuplicated(student.getEmail())) {
+			bindingResult.rejectValue("email", "duplicate", "El email ya está en uso");
+		}
 
-		return ResponseEntity.status(responseStatus)
-				.body(createdStudent);
+		if (studentService.isDniDuplicated(student.getDni())) {
+			bindingResult.rejectValue("dni", "duplicate", "El DNI ya está en uso");
+		}
+
+		if (bindingResult.hasErrors()) {
+			List<String> errorMessages = bindingResult.getFieldErrors().stream()
+				.map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+				.collect(Collectors.toList());
+
+			Map<String, Object> response = new HashMap<>();
+			response.put("success", false);
+			response.put("msg", "Errores de validación");
+			response.put("errors", errorMessages);
+
+			return ResponseEntity.badRequest().body(response);
+		}
+
+
+
+		// Si no hay errores de validación, crear el estudiante
+		StudentEntity createdStudent = studentService.create(student);
+		if (createdStudent != null) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(createdStudent);
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 
 	@GetMapping("{id}")

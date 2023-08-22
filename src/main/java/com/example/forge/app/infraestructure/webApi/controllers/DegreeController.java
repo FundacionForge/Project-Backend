@@ -16,7 +16,7 @@ import com.example.forge.app.application.services.DegreeService;
 import com.example.forge.app.domain.entities.DegreeEntity;
 
 @RestController
-@RequestMapping("degree")
+@RequestMapping("/api/degree")
 public class DegreeController {
 	@Autowired
 	private DegreeService degreeService;
