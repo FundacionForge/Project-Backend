@@ -23,8 +23,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class StudentEntity extends BasePeron {
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private Set<CourseEntity> courses = new HashSet<>();
 

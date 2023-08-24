@@ -1,5 +1,6 @@
 package com.example.forge.app.application.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +18,17 @@ public class StudentService extends BaseService<StudentEntity> {
 	private StudentRepository repository;
 
 	public StudentEntity updateById(Long id, StudentEntity updatedStudent) {
-    Optional<StudentEntity> optionalStudent = repository.findById(id);
-    if (optionalStudent.isPresent()) {
-      StudentEntity student = optionalStudent.get();
-      student.setName(updatedStudent.getName());
-      student.setLastName(updatedStudent.getLastName());
-      student.setMotherLastName(updatedStudent.getMotherLastName());
-      student.setEmail(updatedStudent.getEmail());
-      student.setPhoneNumber(updatedStudent.getPhoneNumber());
-      student.setAddress(updatedStudent.getAddress());
-      return repository.save(student);
-    }
+		Optional<StudentEntity> optionalStudent = repository.findById(id);
+		if (optionalStudent.isPresent()) {
+			StudentEntity student = optionalStudent.get();
+			student.setName(updatedStudent.getName());
+			student.setLastName(updatedStudent.getLastName());
+			student.setMotherLastName(updatedStudent.getMotherLastName());
+			student.setEmail(updatedStudent.getEmail());
+			student.setPhoneNumber(updatedStudent.getPhoneNumber());
+			student.setAddress(updatedStudent.getAddress());
+			return repository.save(student);
+		}
 		return null;
 	}
 
@@ -52,6 +53,7 @@ public class StudentService extends BaseService<StudentEntity> {
 	}
 
 	private static final int PAGE_SIZE = 10;
+
 	public Page<StudentEntity> studentPage(int pageNumber) {
 		PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
 		return repository.findAll(pageRequest);
