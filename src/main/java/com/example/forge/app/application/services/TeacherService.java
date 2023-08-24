@@ -34,16 +34,6 @@ public class TeacherService extends BaseService<TeacherEntity> {
 		return null;
 	}
 
-	public boolean deleteById(Long id) {
-		Optional<TeacherEntity> optionalStudent = repository.findById(id);
-		if (optionalStudent.isPresent()) {
-			repository.delete(optionalStudent.get());
-			;
-			return true;
-		}
-		return false;
-	}
-
 	public Page<TeacherEntity> teacherPerPage(Integer pageNumber, Integer size) {
 		if (pageNumber == null) {
 			pageNumber = 0;

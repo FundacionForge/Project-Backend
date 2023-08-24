@@ -18,6 +18,7 @@ import com.example.forge.app.application.services.TeacherService;
 import com.example.forge.app.domain.entities.TeacherEntity;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -32,16 +33,20 @@ public class TeacherController {
 		@RequestParam(value = "size", required = false) Integer size) {
 		Page<TeacherEntity> teachersPage = teacherService.teacherPerPage(pageNumber, size);
 
+		List<TeacherEntity> teachers = teacherService.getAll();
+		HttpStatus responseStatus = teachers.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+		String responseMessage = teachers.isEmpty() ? "No existen profesores" : "Profesores encontrados";
+
 		Map<String, Object> response = new HashMap<>();
-		response.put("success", true);
-		response.put("msg", "Lista de profesores obtenida");
+		response.put("success", responseStatus == HttpStatus.OK);
+		response.put("msg", responseMessage);
 		response.put("data", teachersPage.getContent());
 
 		response.put("currentPage", teachersPage.getNumber());
 		response.put("totalPages", teachersPage.getTotalPages());
 		response.put("pageSize", teachersPage.getSize());
 
-		return ResponseEntity.status(HttpStatus.OK).body(response);
+		return ResponseEntity.status(responseStatus).body(response);
 	}
 
 	@PostMapping

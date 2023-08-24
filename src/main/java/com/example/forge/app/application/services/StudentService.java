@@ -3,6 +3,7 @@ package com.example.forge.app.application.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.forge.app.domain.entities.TeacherEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,16 +33,6 @@ public class StudentService extends BaseService<StudentEntity> {
 		return null;
 	}
 
-	public boolean deleteById(Long id) {
-		Optional<StudentEntity> optionalStudent = repository.findById(id);
-		if (optionalStudent.isPresent()) {
-			repository.delete(optionalStudent.get());
-			;
-			return true;
-		}
-		return false;
-	}
-
 	public boolean isEmailDuplicated(String email) {
 		long count = repository.countByEmail(email);
 		return count > 0;
@@ -52,10 +43,14 @@ public class StudentService extends BaseService<StudentEntity> {
 		return count > 0;
 	}
 
-	private static final int PAGE_SIZE = 10;
-
-	public Page<StudentEntity> studentPage(int pageNumber) {
-		PageRequest pageRequest = PageRequest.of(pageNumber - 1, PAGE_SIZE);
+	public Page<StudentEntity> studentPerPage(Integer pageNumber, Integer size) {
+		if (pageNumber == null) {
+			pageNumber = 0;
+			size = ((List<StudentEntity>) repository.findAll()).size();
+		} else if (size == null) {
+			size = 10;
+		}
+		PageRequest pageRequest = PageRequest.of(pageNumber, size);
 		return repository.findAll(pageRequest);
 	}
 }
