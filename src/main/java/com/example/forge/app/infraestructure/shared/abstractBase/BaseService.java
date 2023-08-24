@@ -3,7 +3,6 @@ package com.example.forge.app.infraestructure.shared.abstractBase;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.forge.app.domain.entities.TeacherEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

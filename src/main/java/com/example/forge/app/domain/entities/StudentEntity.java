@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.example.forge.app.infraestructure.shared.objectBase.BasePeron;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
