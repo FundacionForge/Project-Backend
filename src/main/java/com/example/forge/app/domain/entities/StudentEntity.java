@@ -13,6 +13,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,13 +27,16 @@ import lombok.Setter;
 public class StudentEntity extends BasePeron {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "course_student", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+	@NotEmpty(message = "La lista de cursos no puede estar vacía")
 	private Set<CourseEntity> courses = new HashSet<>();
 
 	@ManyToOne
 	@JoinColumn(name = "degree_id")
+	@NotNull(message = "El grado no puede estar vacío")
 	private DegreeEntity degrees;
 
 	@ManyToOne
 	@JoinColumn(name = "shift_id")
+	@NotNull(message = "El turno no puede estar vacío")
 	private ShiftEntity shifts;
 }

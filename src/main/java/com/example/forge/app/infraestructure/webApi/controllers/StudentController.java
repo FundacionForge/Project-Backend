@@ -76,6 +76,18 @@ public class StudentController {
 		}
 	}
 
+	@GetMapping("/check-email/{email}")
+	public ResponseEntity<Boolean> checkEmailDuplicate(@PathVariable String email) {
+		boolean isDuplicated = studentService.isEmailDuplicated(email);
+		return ResponseEntity.ok(isDuplicated);
+	}
+
+	@GetMapping("/check-dni/{dni}")
+	public ResponseEntity<Boolean> checkDniDuplicate(@PathVariable String dni) {
+		boolean isDuplicated = studentService.isDniDuplicated(dni);
+		return ResponseEntity.ok(isDuplicated);
+	}
+
 	@GetMapping("{id}")
 	public ResponseEntity<?> getStudent(@PathVariable Long id) {
 		StudentEntity student = studentService.getById(id);
