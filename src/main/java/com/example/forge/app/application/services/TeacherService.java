@@ -3,6 +3,7 @@ package com.example.forge.app.application.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.forge.app.domain.entities.StudentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,8 +34,14 @@ public class TeacherService extends BaseService<TeacherEntity> {
 		return null;
 	}
 
-	public void deleteById(Long id) {
-		repository.deleteById(id);
+	public boolean deleteById(Long id) {
+		Optional<TeacherEntity> optionalStudent = repository.findById(id);
+		if (optionalStudent.isPresent()) {
+			repository.delete(optionalStudent.get());
+			;
+			return true;
+		}
+		return false;
 	}
 
 	public Page<TeacherEntity> teacherPerPage(Integer pageNumber, Integer size) {

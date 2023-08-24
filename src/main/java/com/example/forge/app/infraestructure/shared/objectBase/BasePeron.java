@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @MappedSuperclass
-public class BasePeron extends BaseEntity {
+public abstract class BasePeron extends BaseEntity {
 	@NotBlank(message = "El DNI no puede estar en blanco")
 	@Size(min = 8, max = 8, message = "El DNI debe tener exactamente 8 caracteres")
 	@Column(unique = true)
