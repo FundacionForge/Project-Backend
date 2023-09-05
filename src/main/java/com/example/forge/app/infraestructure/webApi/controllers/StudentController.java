@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.forge.app.application.services.StudentService;
@@ -32,23 +30,16 @@ public class StudentController {
 	private StudentService studentService;
 
 	@GetMapping
-	public ResponseEntity<Map<String, Object>> getAllStudents(
-		@RequestParam(value = "page", required = false) Integer pageNumber,
-		@RequestParam(value = "size", required = false) Integer size) {
-		Page<StudentEntity> teachersPage = studentService.studentPerPage(pageNumber, size);
-
+	public ResponseEntity<Map<String, Object>> getAllStudents() {
 		List<StudentEntity> students = studentService.getAll();
-		HttpStatus responseStatus = students.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK;
+
 		String responseMessage = students.isEmpty() ? "No existen estudiantes" : "Estudiantes encontrados";
+		HttpStatus responseStatus = students.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 
 		Map<String, Object> response = new HashMap<>();
 		response.put("success", responseStatus == HttpStatus.OK);
 		response.put("msg", responseMessage);
 		response.put("data", students);
-
-		response.put("currentPage", teachersPage.getNumber());
-		response.put("totalPages", teachersPage.getTotalPages());
-		response.put("pageSize", teachersPage.getSize());
 
 		return ResponseEntity.status(responseStatus).body(response);
 	}
@@ -65,8 +56,8 @@ public class StudentController {
 
 		if (bindingResult.hasErrors()) {
 			List<String> errorMessages = bindingResult.getFieldErrors().stream()
-				.map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
-				.collect(Collectors.toList());
+					.map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
+					.collect(Collectors.toList());
 
 			Map<String, Object> response = new HashMap<>();
 			response.put("success", false);

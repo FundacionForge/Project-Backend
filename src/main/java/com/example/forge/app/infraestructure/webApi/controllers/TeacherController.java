@@ -1,7 +1,10 @@
 package com.example.forge.app.infraestructure.webApi.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,15 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.forge.app.application.services.TeacherService;
 import com.example.forge.app.domain.entities.TeacherEntity;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/teacher")
@@ -28,11 +26,7 @@ public class TeacherController {
 	private TeacherService teacherService;
 
 	@GetMapping
-	public ResponseEntity<Map<String, Object>> getAllTeachers(
-		@RequestParam(value = "page", required = false) Integer pageNumber,
-		@RequestParam(value = "size", required = false) Integer size) {
-		Page<TeacherEntity> teachersPage = teacherService.teacherPerPage(pageNumber, size);
-
+	public ResponseEntity<Map<String, Object>> getAllTeachers() {
 		List<TeacherEntity> teachers = teacherService.getAll();
 		HttpStatus responseStatus = teachers.isEmpty() ? HttpStatus.NOT_FOUND : HttpStatus.OK;
 		String responseMessage = teachers.isEmpty() ? "No existen profesores" : "Profesores encontrados";
@@ -40,11 +34,7 @@ public class TeacherController {
 		Map<String, Object> response = new HashMap<>();
 		response.put("success", responseStatus == HttpStatus.OK);
 		response.put("msg", responseMessage);
-		response.put("data", teachersPage.getContent());
-
-		response.put("currentPage", teachersPage.getNumber());
-		response.put("totalPages", teachersPage.getTotalPages());
-		response.put("pageSize", teachersPage.getSize());
+		response.put("data", teachers);
 
 		return ResponseEntity.status(responseStatus).body(response);
 	}
@@ -70,28 +60,23 @@ public class TeacherController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<Map<String, Object>> getTeacher(@PathVariable Long id) {
+	public ResponseEntity<?> getTeacher(@PathVariable Long id) {
 		TeacherEntity teacher = teacherService.getById(id);
 
 		if (teacher != null) {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", true);
-			response.put("msg", "Profesor encontrado");
-			response.put("data", teacher);
-
-			return ResponseEntity.status(HttpStatus.OK).body(response);
+			return ResponseEntity.ok().body(teacher);
 		} else {
-			Map<String, Object> response = new HashMap<>();
-			response.put("success", false);
-			response.put("msg", "Profesor no encontrado");
-
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+			Map<String, Object> msg = new HashMap<>();
+			msg.put("success", Boolean.FALSE);
+			msg.put("msg", String.format("No se encontró el profesor con ID %d", id));
+			msg.put("status", HttpStatus.NOT_FOUND.value());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
 		}
 	}
 
 	@PutMapping("{id}")
 	public ResponseEntity<Map<String, Object>> updateTeacher(
-		@PathVariable Long id, @RequestBody TeacherEntity teacherData) {
+			@PathVariable Long id, @RequestBody TeacherEntity teacherData) {
 		TeacherEntity updatedTeacher = teacherService.updateById(id, teacherData);
 
 		if (updatedTeacher != null) {
