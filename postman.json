@@ -26,7 +26,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"dni\": \"12345632\",\r\n  \"name\": \"Juan\",\r\n  \"lastName\": \"Pérez\",\r\n  \"motherLastName\": \"Gómez\",\r\n  \"email\": \"juan.perez32@example.com\",\r\n  \"phoneNumber\": \"1234567890\",\r\n  \"address\": \"Calle 123, Ciudad\",\r\n  \"courses\": [{\"id\": 1}, {\"id\": 2}],\r\n  \"degrees\": {\"id\": 1},\r\n  \"shifts\": {\"id\": 2}\r\n}",
+							"raw": "{\r\n  \"dni\": \"74845954\",\r\n  \"name\": \"Juan\",\r\n  \"lastName\": \"Pérez\",\r\n  \"motherLastName\": \"Gómez\",\r\n  \"email\": \"juans.perez32@example.com\",\r\n  \"phoneNumber\": \"934737663\",\r\n  \"address\": \"Calle 123, Ciudad\",\r\n  \"courses\": [{\"id\":1}, {\"id\":2}],\r\n  \"degrees\": {\"id\":1},\r\n  \"shifts\": {\"id\":2}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -77,27 +77,17 @@
 				{
 					"name": "getById",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/api/student/1",
+							"raw": "{{API}}/api/student/3",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
 								"api",
 								"student",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -149,7 +139,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"dni\": \"74845954\",\r\n  \"name\": \"Daniela\",\r\n  \"lastName\": \"Alanya\",\r\n  \"motherLastName\": \"Pacheco\",\r\n  \"email\": \"juan.perez@example.com\",\r\n  \"phoneNumber\": \"1234567890\",\r\n  \"address\": \"Calle 123, Ciudad\"\r\n}",
+							"raw": "{\r\n    \"dni\": \"74845954\",\r\n    \"name\": \"Juan22\",\r\n    \"lastName\": \"Pérez22\",\r\n    \"motherLastName\": \"Gómez22\",\r\n    \"email\": \"juans2.perez32@example.com\",\r\n    \"phoneNumber\": \"934737663\",\r\n    \"address\": \"Calle 123, Ciudad\",\r\n    \"courses\": [{\"id\":2}, {\"id\":4}],\r\n    \"degrees\": {\"id\":2},\r\n    \"shifts\": {\"id\":1}\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -157,14 +147,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{API}}/api/student/1",
+							"raw": "{{API}}/api/student/8",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
 								"api",
 								"student",
-								"1"
+								"8"
 							]
 						}
 					},
@@ -178,16 +168,6 @@
 				{
 					"name": "getAll",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -210,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"correo_electronico5@example.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\",\r\n    \"email\": \"correo_electronico2@example.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -233,16 +213,6 @@
 				{
 					"name": "getById",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -266,7 +236,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin2\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -335,7 +305,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"dni\": \"12345678\",\r\n  \"name\": \"Juan\",\r\n  \"lastName\": \"Pérez\",\r\n  \"email\": \"juan.perez@example.com\",\r\n  \"address\": \"Calle Principal 123\",\r\n  \"phoneNumber\": \"123456789\",\r\n  \"degrees\": [ {\"id\": 1}, {\"id\": 2}],\r\n  \"shifts\": {\r\n    \"id\": 2\r\n  },\r\n  \"courses\": {\r\n    \"id\": 4\r\n  },\r\n  \"qualification\": {\r\n    \"id\": 1\r\n  }\r\n}",
+							"raw": "{\r\n  \"dni\": \"123456782\",\r\n  \"name\": \"Juan\",\r\n  \"lastName\": \"Pérez\",\r\n  \"motherLastName\": \"Gómez\",\r\n  \"email\": \"juan.perez2@example.com\",\r\n  \"address\": \"Calle Principal 123\",\r\n  \"phoneNumber\": \"123456789\",\r\n  \"degrees\": [ {\"id\": 1}, {\"id\": 2}],\r\n  \"shifts\": {\r\n    \"id\": 2\r\n  },\r\n  \"courses\": {\r\n    \"id\": 4\r\n  },\r\n  \"qualification\": {\r\n    \"id\": 1\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -354,6 +324,25 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/api/teacher/3",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"api",
+								"teacher",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -363,16 +352,6 @@
 				{
 					"name": "getAll",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -396,26 +375,16 @@
 				{
 					"name": "getAll",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API}}/api/shifts",
+							"raw": "{{API}}/api/shift",
 							"host": [
 								"{{API}}"
 							],
 							"path": [
 								"api",
-								"shifts"
+								"shift"
 							]
 						}
 					},
@@ -458,16 +427,6 @@
 				{
 					"name": "getAll",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -538,11 +497,11 @@
 	"variable": [
 		{
 			"key": "API",
-			"value": "http://localhost:8080"
+			"value": ""
 		},
 		{
 			"key": "TOKEN",
-			"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MDg3MTQ1MSwiZXhwIjoxNjkzNDYzNDUxfQ.s5rAeSK992XEvWWwb6Z15O3yb_06EDEvQ2-8t8x_0m0"
+			"value": ""
 		}
 	]
 }
